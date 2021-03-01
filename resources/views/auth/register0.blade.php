@@ -5,17 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-
-                @if ($errors->any())
-                  <div class="alert alert-danger">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-                @endif
-
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
@@ -70,30 +59,6 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
-                        </div>
-
-                        <div class="">
-                          <label for="address">Address</label>
-                          <input type="text" name="address" value="{{ old('address') }}" maxlength="255" required>
-                          {{-- <input type="text" name="address" value="{{ old('address') }}"> --}}
-
-                          <label for="piva">PIVA</label>
-                          <input type="text" name="piva" value="{{ old('piva') }}" minlength="11" maxlength="11" required>
-                          {{-- <input type="text" name="piva" value="{{ old('piva') }}"> --}}
-
-                          <label for="phone">Phone</label>
-                          <input type="text" name="phone" value="{{ old('phone') }}" minlength="6" maxlength="30" required>
-                          {{-- <input type="text" name="phone" value="{{ old('phone') }}"> --}}
-
-                          <label for="delivery_cost_euro">Delivery cost (prima della virgola)</label>
-                          <input type="number" name="delivery_cost_euro" value="{{ old('delivery_cost_euro') }}" min="0" max="9999" required>
-                          {{-- <input type="number" name="delivery_cost_euro" value="{{ old('delivery_cost_euro') }}"> --}}
-
-                          <label for="delivery_cost_cent">Delivery_cost (centesimi)</label>
-                          <input type="number" name="delivery_cost_cent" value="{{ old('delivery_cost_cent') }}" min="0" max="99" required>
-                          {{-- <input type="number" name="delivery_cost_cent" value="{{ old('delivery_cost_cent') }}"> --}}
-
-
                         </div>
 
                         <div class="form-group row mb-0">

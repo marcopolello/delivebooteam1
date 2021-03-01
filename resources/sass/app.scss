@@ -5,14 +5,19 @@
 // Variables
 @import 'variables';
 
-//Bootstrap
+// Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 // other
 @import 'plate';
 
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// }
+@import 'dashboard';
+@import 'dashboard_plates';
+
+@import 'edit_restaurant';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

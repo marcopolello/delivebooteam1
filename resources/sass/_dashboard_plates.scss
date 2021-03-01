@@ -1,0 +1,22 @@
+@mixin default-border {
+  border: 1px solid black;
+}
+
+.dashboard_plate {
+  display: flex;
+  flex-wrap: wrap;
+
+  .column {
+    width: 100px;
+    margin: 5px 0;
+    padding: 2px 5px;
+    @include default-border;
+
+    & > *{
+      margin: 0;
+    }
+    & > p:first-child {
+      font-weight: bold;
+    }
+  }
+}

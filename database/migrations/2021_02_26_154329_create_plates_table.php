@@ -17,14 +17,14 @@ class CreatePlatesTable extends Migration
             $table->id();
 
             $table->string('plate_name', 30);
-            $table->text('ingredients');
+            $table->text('ingredients', 2000);
             $table->string('description') -> nullable();
             $table->string('price', 6);
             $table->boolean('visible');
             $table->tinyInteger('discount');
             $table->boolean('availability');
             $table->string('img') -> nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id') -> nullable();
             $table->unsignedBigInteger('user_id');
 
             $table->timestamps();

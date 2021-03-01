@@ -23,7 +23,8 @@ class CategorySeeder extends Seeder
         'dessert',
         'bevande',
         'bibite',
-        'alcolici'
+        'alcolici',
+        'cancellato',
       ];
 
       foreach ($defaultCategories as $category) {
