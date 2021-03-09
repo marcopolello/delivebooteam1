@@ -1,72 +1,91 @@
-@extends('layouts.main-layout')
+@extends('layouts.layout-welcome')
 
 @section('content')
 
-  {{-- HOME - JUMBOTRON --}}
-  <div class="jumbotron jumbotron-fluid">
-    <div class="overlay"></div>
-      <div class="container container-input center_home">
-        <div class="row justify-content-center">
-          <h1 class="display-4">
-            Hai voglia di qualcosa in particolare?
-          </h1>
-        </div>
-        {{-- JUMBOTRON - SEARCHBAR --}}
-        <div class="input-group">
-          <div class="filter">
+    {{-- MAIN --}}
+    <main>
 
-            {{-- SEARCH - FORM --}}
-            <form id="form-search" action="" method="get">
-              {{-- @csrf
-              @method('GET') --}}
-              <div class="form-group">
-                <div class="row flex-nowrap justify-content-space-between">
-                  {{-- BARRA DI RICERCA --}}
-                  <input type="search" class="form-control" id="home-search-bar"  name='search' placeholder="Cerca" value="">
-                  {{-- SUBMIT --}}
-                  <input type="submit" id="submit-home" class="btn bnb_btn" value='Cerca'>
+        <div class="container">
 
+            <slider></slider>
+
+            {{-- lista ristoranti --}}
+          <section v-if="displayRestaurants">
+              <h1>Restaurants</h1>
+
+              <div class="restaurants">
+
+                <div  v-for="restaurant in restaurants" :key="restaurant.id">
+                    {{-- <p>@{{restaurant}}</p> --}}
+                    <restaurant
+                      :restaurant_data="restaurant"
+                    ></restaurant>
                 </div>
+
               </div>
-            </form>
-          </div>
+          </section>
+
+          <section v-if="displayPlates">
+            <h1>Plates</h1>
+
+            <div class="home_plates">
+
+              <div class="home_plate_container" v-for="plate in plates" :key="plate.id">
+                  {{-- <div class="home_plate_container"> --}}
+                    <a :href="'/restaurant/' + plate.user_id">
+                      <section v-if="plate.img != null" class="img" :style="{'background-image':'url(' + '/storage/plates/' + plate.img + ')'}">
+                        <p v-show="plate.discount > 0" class="discount">@{{plate.discount}}%</p>
+                      </section>
+                      <section v-else class="img" :style="{'background-image':'url(' + '/storage/placeholder.svg' + ')'}">
+                        <p v-show="plate.discount > 0" class="discount">@{{plate.discount}}%</p>
+                      </section>
+
+                      <section class="description">
+                        <h2 class="title">@{{plate.plate_name}}</h2>
+                        <p class="ingredients">Ingredienti: @{{plate.ingredients}}</p>
+                        <p class="plate_description">Descrizione: @{{plate.description}}</p>
+                        <span :class="['price' ,{'line': plate.discount > 0}]">@{{plate.price/100}}€</span>
+                        <span v-show="plate.discount > 0" class="discounted_price">@{{plate_final_price(plate.price, plate.discount)}}€</span>
+                      </section>
+                    </a>
+                  {{-- </div> --}}
+              </div>
+
+            </div>
+          </section>
+
         </div>
-      </div>
-  </div>
 
-  {{-- HOME - SECTION-PIATTI' --}}
-  <div class="container-fluid" style="margin-bottom: 2rem;">
-    <div class="row">
-      <div class="col-md-10 offset-1">
-        <div class="food-show-home">
-          {{-- SPOT VUOTO --}}
-          <div class="row">
+    </main>
 
-              <div class="col-md-2">
-                <img src="img/pizza.png" alt="">
-              </div>
-              <div class="col-md-2">
-                <img src="img/kebab.png" alt="">
-              </div>
-              <div class="col-md-2">
-                <img src="img/pizza.png" alt="">
-              </div>
-              <div class="col-md-2">
-                <img src="img/kebab.png" alt="">
-              </div>
-              <div class="col-md-2">
-                <img src="img/pizza.png" alt="">
-              </div>
-              <div class="col-md-2">
-                <img src="img/dessert.png" alt="">
-              </div>
+    {{-- FOOTER --}}
+    <footer>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>Scopri deliveroo</li>
+                    <li><a href="#">asdfghjkl</a></li>
+                    <li><a href="#">asdfghjkl</a></li>
+                    <li><a href="#">asdfghjkl</a></li>
+                </ul>
 
-          </div>
+                <ul>
+                    <li>FAQ</li>
+                    <li><a href="#">asdfghjkl</a></li>
+                    <li><a href="#">asdfghjkl</a></li>
+                    <li><a href="#">asdfghjkl</a></li>
+                </ul>
+
+                <ul>
+                    <li>Aiuto</li>
+                    <li><a href="#">asdfghjkl</a></li>
+                    <li><a href="#">asdfghjkl</a></li>
+                    <li><a href="#">asdfghjkl</a></li>
+                </ul>
+
+            </nav>
+
+            <div class="copyright">copyright</div>
         </div>
-      </div>
-      {{-- FIX OFFSET --}}
-      <div class="col-md-1"></div>
-    </div>
-  </div>
-
+    </footer>
 @endsection

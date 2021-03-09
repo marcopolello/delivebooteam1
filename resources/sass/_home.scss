@@ -1,21 +1,4 @@
 // container varie locandine cibo
-.food-show-home {
-  height: 150px;
-  width: 100%;
-  background-color: black;
-  color: white;
-  border-radius: 1rem;
-  transform: translateX(400px);
-  opacity: 0;
-  padding: 30px;
-  animation: slide-left 3s 2s ease-in-out forwards;
-  .locandina{
-    margin:0 20px;
-    border-radius: 4px;
-    img {
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-    }
-  }
+.plates_container{
+  padding: 20px;
 }

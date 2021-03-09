@@ -1,130 +1,43 @@
 // INIZIO HEADER
-header {
+// HEADER
+header{
 
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 80px;
-  background-color: white;
-  padding-left: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transition: all 0.4s linear;
-  background-color: transparent;
+  // debug
+    background-color: white;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    height: 80px;
+  // end
 
-  &:hover .register-button {
-    transition: all 0.3s linear;
-  }
-
-  .header-sx {
-    width: 50%;
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto; 
 
-    .header-logo {
-      @include allcenter;
-      width: 30%;
-      div {
-        margin-top: 11px;
-        a {
-          margin-top: 11px;
-          img {
-            width: 90px;
-            height: 75px;
-            margin-bottom: 10px;
-          }
-        }
-      }
+    img{
+      width: 150px;
     }
   }
+}
 
-  // HEADER DX
-  .header-dx {
-    display: flex;
-    width: 40%;
-    justify-content: space-around;
-    ul {
-      margin-top: 16px;
-      width: 100%;
-      list-style-type: none;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      li {
-        a {
-          text-decoration: none;
-          font-weight: bold;
-          color: white;
-          letter-spacing: 1.5px;
-        }
-        &#login {
-           a {
-            color: white !important;
-          }
-        }
-      }
-      .register-button {
-          color: white !important;
-          letter-spacing: 1.5px;
-      }
-      i {
-        color: white !important;
-      }
-    }
-    .register-button {
-      padding: 0 1px !important;
-      height: 40px;
-      border: 1px solid $bluedark;
-      border-radius: 0.25rem;
-      display: flex;
-      align-items: center;
-      color: white;
-    }
-    #login {
-      transition: all .2s linear;
-      &:hover {
-        opacity: .7;
-      }
-    }
-    .login-button {
-      padding: 0 16px;
-      height: 40px;
-      background: $bluedark;
-      border-radius: 0.25rem;
-      display: flex;
-      align-items: center;
-      color: white;
-    }
-
-    .dropdown {
-      a {
-        color: $bluedark !important;
-      }
-    }
-  }
-
-
-  // FINE HEADER DX
 
   // INIZIO HEADER DX RESPONSIVE
-  @media screen and (max-width: 980px) {
+  // @media screen and (max-width: 980px) {
 
-    header{
-      display: flex;
-      justify-content: space-between;
-    }
+  //   header{
+  //     display: flex;
+  //     justify-content: space-between;
+  //   }
 
 
 
-  }
+  // }
 
-  @media screen and (min-width: 981px) {
+  // @media screen and (min-width: 981px) {
 
-  }
+  // }
   // FINE HEADER DX RESPONSIVE
 
-}
+

@@ -2,9 +2,11 @@
   <h4>Benvenuto: {{$user -> name}}</h4>
   <h3>Lista di tutti i piatti</h3>
 
+  <h3><a href="{{ route('dashboard') }}">Torna alla dashboard</a></h3>
+
   <ul>
     @foreach ($user -> plates as $plate)
-      @if ($plate -> category -> category != 'cancellato')
+      @if ($plate -> destroyed != 1)
       <li>
         <div class="dashboard_plate">
 
@@ -44,7 +46,9 @@
 
           <div class="column">
             <p>Categoria</p>
-            <p>{{$plate -> category -> category}}</p>
+            @if ($plate -> category)
+              <p>{{$plate -> category -> category}}</p>  
+            @endif
         </div>
 
           <div class="column">

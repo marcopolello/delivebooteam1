@@ -7,27 +7,25 @@
   border: 1px solid black;
 }
 $colore_secondario: #00C2B3;
-
 .plate_container {
   display: flex;
   background-color: white;
   border-radius: 5px;
-  width: 50%;
-  height: 130px;
+  width: 20%;
+  height: 230px;
   padding: 10px;
   font-size: 18px;
   position: relative;
-
   border: 1px solid black;
-
+  // proprietà aggiunte
+  margin: 10px;
+  display: inline-block;
   &:hover {
     cursor: pointer;
   }
-
   .plate_text {
     // @include debug-border;
     width: calc(100% - 108px);
-
     .title {
       font-size: 1em;
       max-height: 25%;
@@ -35,7 +33,6 @@ $colore_secondario: #00C2B3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-
     }
     .descrizione {
       font-size: 0.8em;
@@ -57,17 +54,14 @@ $colore_secondario: #00C2B3;
       height: 25%;
     }
   }
-
   .plate_img {
     // @include debug-border;
-
     height: 108px;
     width:  108px;
     flex-shrink: 0;
     position: relative;
     background-position: center;
     background-size: cover;
-
     .sconto {
       position: absolute;
       bottom: 5px;
@@ -79,13 +73,11 @@ $colore_secondario: #00C2B3;
       border-radius: 3px;
     }
   }
-
   .plate_text .prezzo_barrato {
     text-decoration: line-through;
     color: red;
     font-size: 1em;
   }
-
   .plate_esaurito {
     position: absolute;
     top: 0;
@@ -96,10 +88,20 @@ $colore_secondario: #00C2B3;
     background-color: rgba(140, 140, 140, 0.6);
   }
 
-  // DETAILS
+  .layover {
+    position: fixed;
+    z-index: 5;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(1px);
+  }
 
+  // DETAILS
   .plate_detail {
     position: fixed;
+    z-index: 1000;
     width: 600px;
     height: 80vh;
     top: 5%;
@@ -115,7 +117,6 @@ $colore_secondario: #00C2B3;
       height: 50px;
       position: relative;
       @include flex-centratura;
-
       .close_details {
         width: 35px;
         height: 50px;
@@ -125,18 +126,15 @@ $colore_secondario: #00C2B3;
         position: absolute;
         right: 0;
         top: 0;
-
         &:hover {
           cursor: pointer;
         }
       }
     }
-
     .show {
       height: calc(100% - 150px);
       padding: 8px;
       overflow: auto;
-
       .plate_img {
         margin: auto;
         width: 350px;
@@ -144,19 +142,16 @@ $colore_secondario: #00C2B3;
         margin: 10px auto;
         border-radius: 50%;
       }
-
       .quantity_pannel {
         width: 200px;
         height: 30px;
         margin: 10px auto;
         display: flex;
         @include debug-border;
-
         .remove_plate {
           width: 40px;
           height: 100%;
           @include flex-centratura;
-
           &:hover {
             cursor: pointer;
           }
@@ -170,14 +165,12 @@ $colore_secondario: #00C2B3;
           width: 40px;
           height: 100%;
           @include flex-centratura;
-
           &:hover {
             cursor: pointer;
           }
         }
       }
     }
-
     .total {
       height: 100px;
       border-top: 1px solid lightgrey;
@@ -185,23 +178,19 @@ $colore_secondario: #00C2B3;
       justify-content: space-between;
       align-items: center;
       padding: 20px;
-
       .button {
         @include flex-centratura;
         height: 60px;
         padding: 15px;
         border-radius: 3px;
-
         &:hover {
           cursor: pointer;
         }
       }
-
       .button-light {
         width: 150px;
         border: 1px solid lightgrey;
         color: $colore_secondario;
-
       }
       .button-strong {
         width: 300px;
@@ -209,7 +198,5 @@ $colore_secondario: #00C2B3;
         color: white;
       }
     }
-
   }
-
 }

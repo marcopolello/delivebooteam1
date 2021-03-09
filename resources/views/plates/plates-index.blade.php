@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{asset('/css/app.css')}}">
   </head>
   <body>
-    @include('plates.plates')
+    <div id="app">
+      @include('plates.plates')
+    </div>
   </body>
 </html>

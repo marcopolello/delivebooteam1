@@ -1,83 +1,457 @@
 .container-dashboard {
-    width: 100vw;
     display: flex;
     justify-content: space-between;
+    width: 100vw;
     height: 100vh;
 }
 
 .left-side-dash {
-    width: 25%;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
     height: auto;
-    background-color: darkgray;
-
-    hr {
-        color: rgb(190, 190, 190);
-    }
-
+    overflow: auto;
+    background-color: $color_deliveroo;
     padding-left: 2rem;
     padding-top: 3rem;
     padding-right: 2rem;
+    display: block;
+    @media all and (min-width: 868px) and (max-width: 1199px) {
+        width: 30%;
+    }
 
-    display: flex;
-    flex-direction: column;
+    @media all and (min-width: 576px) and (max-width: 867px) {
+        display: none;
+    }
+
+    @media all and (max-width: 575px) {
+        display: none;
+    }
+
+    .img-user {
+        display: flex;
+        justify-content: center;
+        width: 125px;
+        height: 125px;
+        margin: 20px auto;
+        border-radius: 50%;
+        border: 2px solid $variable2;
+
+        @media all and (min-width: 1200px) and (max-width: 1600px) {
+            width: 100px;
+            height: 100px;
+        }
+
+
+        @media all and (min-width: 868px) and (max-width: 1199px) {
+            width: 90px;
+            height: 90px;
+        }
+
+        @media all and (min-width: 576px) and (max-width: 867px) {
+            width: 50px;
+            height: 50px;
+        }
+
+
+        & > img {
+            width: 100%;
+            border-radius: 50%;
+        }
+    }
+
+    & > h1 {
+        color: $variable2;
+        text-align: center;
+        margin-bottom: 2rem;
+
+        @media all and (min-width: 868px) and (max-width: 1999px) {
+            font-size: 30px;
+        }
+
+    }
+
+    & > form > #pls-plate {
+        background-color: $variable2;
+        color: $color_deliveroo;
+        font-weight: bold;
+        font-size: 16px;
+        text-transform: uppercase;
+        text-align: center;
+        width: 100%;
+        padding: 0.6rem $padding_button;
+        margin-top: 1rem;
+        border: none;
+        border-radius: $border_button;
+        box-shadow: $shadow_button;
+        transition: 0.2s ease-in-out;
+    }
+
+
+    i {
+        margin-right: 5px;
+        font-size: 18px;
+    }
 
     .buttons-left-dash {
         display: flex;
+        justify-content: center;
         flex-direction: column;
         padding-top: 3rem;
-        
+
+        h4 {
+            margin-top: 2.5rem;
+            // margin-left: 1.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: $variable2;
+        }
+
         button {
+            background-color: $variable2;
+            color: $color_deliveroo;
             width: 100%;
-            padding: 0.6rem;
+            padding: 0.6rem $padding_button;
             margin-top: 1rem;
+            // margin-left: $margin_button_left;
+            border: none;
+            border-radius: $border_button;
+            box-shadow: $shadow_button;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: 0.5s;
+
+            .plate-color {
+                background-color: $primary;
+            }
+
+            .order-color {
+                background-color: $complementary;
+            }
+
+            span {
+                position: absolute;
+                width: 25%;
+                height: 100%;
+                transform: translateY(150%);
+                border-radius: 50%;
+                left: calc((var(--n) - 1) * 25%);
+                transition: 0.5s;
+                transition-delay: calc((var(--n) - 1) * 0.1s);
+                z-index: -1;
+            }
+
+            span:nth-child(1) {
+                --n: 1;
+            }
+
+            span:nth-child(2) {
+                --n: 2;
+            }
+
+            span:nth-child(3) {
+                --n: 3;
+            }
+
+            span:nth-child(4) {
+                --n: 4;
+            }
+
+        }
+
+        a {
+            width: 100%;
+            font-size: 16px;
+            text-transform: uppercase;
+            border-radius: $border_button;
+            box-shadow: $shadow_button;
+            margin: 100px 0 50px 0;
         }
 
     }
 }
 
 .right-side-dash {
-    width: 75%;
-    height: auto;
-    background-color: white;
-    padding: 0 3rem;
-
     display: flex;
     flex-direction: column;
+    width: 80%;
+    height: auto;
+    overflow: auto;
+    background-color: white;
+    padding: 0 2rem;
+
+    @media all and (min-width: 868px) and (max-width: 1199px) {
+        width: 70%;
+    }
+
+    @media all and (min-width: 576px) and (max-width: 867px) {
+        width: 100%;
+    }
+
+    @media all and (max-width: 575px) {
+        width: 100%;
+    }
+
+
 
     .header-right-dash {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         padding-top: 3rem;
 
-        button {
-            width: 100%;
-            padding: 0.6rem;
-            margin-top: 1rem;
+        & > h3 {
+
+            @media all and (min-width: 868px) and (max-width: 1199px) {
+                font-size: 20px;
+            }
+
+            @media all and (min-width: 576px) and (max-width: 867px) {
+                display: none;
+            }
+
+            @media all and (max-width: 575px) {
+                display: none;
+            }
+
+        }
+
+        & > h3 > span {
+            font-size: $font_username;
+
+            @media all and (min-width: 868px) and (max-width: 1199px) {
+                font-size: 25px;
+            }
+
+            @media all and (min-width: 576px) and (max-width: 867px) {
+                display: none;
+            }
+
+            @media all and (max-width: 575px) {
+                display: none;
+            }
+
+        }
+
+        img {
+            width: 120px;
+            margin-right: 5px;
+
+            @media all and (min-width: 868px) and (max-width: 1199px) {
+                width: 100px;
+            }
+
+            @media all and (max-width: 575px) {
+                width: 70px;
+            }
+
         }
     }
+
+    .container-card {
+        display: flex;
+        justify-content: space-between;
+
+        @media all and (min-width: 868px) and (max-width: 1199px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media all and (min-width: 576px) and (max-width: 867px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media all and (max-width: 575px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+        .card {
+            flex-basis: calc((100% / 3) - 40px);
+            height: 500px;
+            border-radius: $border-card;
+            box-shadow: $shadow_button;
+            margin: 50px 0px;
+            padding: 15px;
+
+            @media all and (min-width: 1200px) and (max-width: 1600px) {
+                flex-basis: calc((100% / 3) - 20px);
+                height: auto;
+            }
+
+            @media all and (min-width: 868px) and (max-width: 1199px) {
+                height: auto;
+                flex-basis: 100%;
+                margin: 50px 0px 0px 0px;
+            }
+
+
+            & > h3 {
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: bold;
+                color: $color_deliveroo;
+
+                @media all and (min-width: 1200px) and (max-width: 1600px) {
+                    font-size: 24px;
+                }
+
+
+                @media all and (min-width: 868px) and (max-width: 1199px) {
+                    font-size: 20px;
+                }
+
+                @media all and (min-width: 576px) and (max-width: 867px) {
+                    font-size: 18px;
+                }
+
+                @media all and (max-width: 575px) {
+                    font-size: 16px;
+                }
+
+            }
+
+            .mini-card {
+                width: 90%;
+                margin: 10px auto;
+                padding: 20px;
+                height: calc(100% / 3);
+                background-color: $color_deliveroo;
+                color: $variable2;
+                border-radius: $border-card;
+                box-shadow: $shadow_button;
+
+                @media all and (min-width: 1200px) and (max-width: 1600px) {
+
+                }
+
+                hr {
+                    margin: 0 0 5px 0;
+                    border-color: $variable2;
+                }
+
+                .price-right {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                p {
+                    margin: 0;
+                }
+            }
+
+            .graph-chart-js > h3 {
+                text-align: center;
+            }
+
+            .percentual-feed {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                width: 250px;
+                height: 250px;
+                margin: auto;
+                border-radius: 50%;
+                border: 35px solid $color_deliveroo;
+
+                @media all and (min-width: 1200px) and (max-width: 1600px) {
+                    width: 200px;
+                    height: 200px;
+                    border: 25px solid $color_deliveroo;
+                }
+
+                @media all and (min-width: 868px) and (max-width: 1199px) {
+                    width: 150px;
+                    height: 150px;
+                    border: 15px solid $color_deliveroo;
+                }
+
+                @media all and (max-width: 575px) {
+                    width: 130px;
+                    height: 130px;
+                    border: 14px solid $color_deliveroo;
+                }
+
+                & > h1 {
+                    margin: 0;
+                    color: $color_deliveroo;
+                    font-weight: bold;
+
+                    @media all and (min-width: 868px) and (max-width: 1199px) {
+                        font-size: 30px;
+                    }
+
+                    @media all and (min-width: 576px) and (max-width: 867px) {
+                        font-size: 26px;
+                    }
+
+                    @media all and (max-width: 575px) {
+                        font-size: 22px;
+                    }
+                }
+
+                & > h4 {
+                    margin: 0;
+                    color: $color_deliveroo;
+                    font-weight: bold;
+
+                    @media all and (min-width: 868px) and (max-width: 1199px) {
+                        font-size: 16px;
+                    }
+
+                    @media all and (min-width: 576px) and (max-width: 867px) {
+                        font-size: 14px;
+                    }
+
+                    @media all and (max-width: 575px) {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        #resp-card {
+            @media all and (max-width: 575px) {
+                height: 200px;
+            }
+        }
+    }
+
 
     .last-order {
         width: 100%;
         display: flex;
         flex-direction: column;
         height: auto;
-        margin: 2rem 0;
+        margin: 4rem 0 1rem 0;
 
         h2 {
             margin-bottom: 1rem;
+
+            @media all and (max-width: 575px) {
+                font-size: 18px;
+            }
+
         }
     }
 
     .card-order {
-        width: 100%;
-        background-color: rgb(216, 216, 216);
-        border-radius: 18px;
-        height: 120px;
-        margin-bottom: 2rem;
-
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100%;
+        background-color: $color_deliveroo;
+        border-radius: 18px;
+        height: auto;
+        margin-bottom: 2rem;
+        box-shadow: $shadow_button;
+        padding: 10px;
+
+
 
         .card-relative {
             width: 95%;
@@ -86,17 +460,72 @@
             justify-content: space-between;
 
             .order-info {
+                color: $variable2;
                 width: 70%;
                 height: 100%;
+
+                h3 {
+
+                    @media all and (min-width: 576px) and (max-width: 867px) {
+                        font-size: 18px;
+                    }
+
+                    @media all and (max-width: 575px) {
+                        font-size: 15px;
+                    }
+
+                }
+
+                & > hr {
+                    border-color: $variable2;
+                }
+
+                & > p:nth-last-child(2) {
+                    margin-bottom: 0;
+                }
+
             }
 
             .right-card-order {
+                color: $variable2;
                 width: 30%;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: flex-end;
+
+                @media all and (min-width: 576px) and (max-width: 867px) {
+                    width: 20%;
+                    height: 100%;
+                }
+
+
+                button {
+                    background-color: $variable2;
+                    color: $color_deliveroo;
+                    border-radius: $border_button;
+                    border: none;
+                    padding: 0.6rem $padding_button;
+                    margin-bottom: 10px;
+                    box-shadow: $shadow_button;
+
+                    @media all and (min-width: 576px) and (max-width: 867px) {
+                        padding: 0.2rem $padding_button;
+                        font-size: 11px;
+                        height: 42px;
+                        width: 70px;
+                        margin-bottom: 0;
+                    }
+
+                    @media all and (max-width: 575px) {
+                        padding: 0.2rem $padding_button;
+                        font-size: 11px;
+                        height: 42px;
+                        width: 70px;
+                        margin-bottom: 0;
+                    }
+                }
             }
         }
     }
@@ -104,5 +533,41 @@
     .footer-dash {
         display: flex;
         justify-content: space-between;
+
+        button {
+            background-color: $color_deliveroo;
+            color: $variable2;
+            border-radius: $border_button;
+            border: none;
+            padding: 0.6rem $padding_button;
+            transition: box-shadow 0.22s ease-in-out, color 0.22s ease-in-out;
+            margin-bottom: 20px;
+        }
     }
+}
+
+// HOVER
+.left-side-dash > form > #pls-plate:hover {
+    color: $variable1;
+    transform: scale(1.04);
+}
+
+.buttons-left-dash button:hover {
+    color: $variable1;
+}
+
+
+.buttons-left-dash button:hover span {
+    transform: translateY(0) scale(2);
+}
+
+
+.header-right-dash button:hover {
+    color: $variable1;
+    box-shadow: $shadow_button;
+}
+
+.footer-dash button:hover {
+    color: $variable1;
+    box-shadow: $shadow_button;
 }

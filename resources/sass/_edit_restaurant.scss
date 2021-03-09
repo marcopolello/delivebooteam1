@@ -1,28 +1,95 @@
-.main-edit-restaurant {
+// .main-edit-restaurant {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// .user-info {
+//     width: 1140px;
+//     margin: 2.5rem 3rem;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+
+//     .propic-user {
+//         width: 300px;
+//         height: auto;
+//     }
+
+//     .left-side-edit-restaurant {
+//         padding: 0 1rem;
+//         width: 60%;
+//     }
+
+//     .right-side-edit-restaurant {
+//         width: 40%;
+//         padding: 0 1rem;
+//     }
+// }
+
+.sides-flex-edit-restaurant {
+    width: 80%;
     display: flex;
     justify-content: center;
-    align-items: center;
-}
+    border: 1px solid;
+    margin: auto;
+    padding: 50px 0;
 
-.user-info {
-    width: 1140px;
-    margin: 2.5rem 3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .propic-user {
-        width: 300px;
-        height: auto;
+    input[type=text],
+    textarea,
+    input[type=number]{
+        width: 100%;
+    }
+    input {
+        height: 40px;
+    }
+    textarea{
+        height: 100px;
     }
 
-    .left-side-edit-restaurant {
-        padding: 0 1rem;
-        width: 60%;
-    }
-
+    .left-side-edit-restaurant,
     .right-side-edit-restaurant {
-        width: 40%;
-        padding: 0 1rem;
+        background-color: white;
+        padding: 10px;
+        
+    }
+
+    // SIDE LEFT
+    .left-side-edit-restaurant{
+        // border: 4px solid #00ccbc;
+        // max-width: 300px;
+        border-radius: 40px 0 0 40px;
+        .restaurant-image{
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 1px solid lightgray;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-color: #d7d7d7;
+        }
+
+    }
+    // SIDE RIGHT
+    .right-side-edit-restaurant{
+        // border: 1px solid;
+        flex-grow: 1;
+        border-radius: 0 40px 40px 0;
     }
 }
+
+// media md, s
+@media screen and (max-width: 800px) {
+    .sides-flex-edit-restaurant {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+// media lg
+// @media screen and (min-width: 801px) {
+//     .right-side-edit-restaurant{
+//         margin-left: 10px;
+//     }
+// }

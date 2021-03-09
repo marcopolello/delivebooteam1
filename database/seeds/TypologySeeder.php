@@ -56,10 +56,6 @@ class TypologySeeder extends Seeder
           $newtypology = new Typology();
           $newtypology ->typology = $typology;
           $newtypology -> save();
-
-          $restaurants = User::inRandomOrder()
-          ->limit(rand(1,5)) ->get();
-          $newtypology -> users() -> attach($restaurants);
         }
 
     }
