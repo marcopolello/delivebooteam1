@@ -42,8 +42,10 @@ class PlateController extends Controller
       $data['availability'] = 0;
     }
 
+
+
     // trasformo il prezzo da due valori ad un valore
-    $plate_price = $data['price_euro'] . $data['price_cents'];
+    $plate_price = ($data['price_euro'] * 100) + $data['price_cents'];
     unset($data['price_euro']);
     unset($data['price_cents']);
 
@@ -68,7 +70,7 @@ class PlateController extends Controller
     $plate -> price = $plate_price;
 
     // foto 
-    if ($data['img']) {
+    if (array_key_exists('img', $data)) {
 
       $img = $request -> file('img');
 
@@ -128,7 +130,7 @@ class PlateController extends Controller
 
     ]) -> validate();
 
-    $plate_price = $data['price_euro'] . $data['price_cents'];
+    $plate_price = ($data['price_euro'] * 100) + $data['price_cents'];
 
     $plate = Plate::findOrFail($id);
     $plate -> price = $plate_price;

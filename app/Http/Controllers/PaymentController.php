@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ use App\Plate;
 use App\User;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
 use App\Mail\PayMail;
 
 
@@ -20,7 +20,7 @@ class PaymentController extends Controller
   public function getCart(Request $request) {
 
     $data = $request -> json() -> all();
-    
+
     $plates_selected = [];
     $to_pay = 0;
     $delivery_cost = 0;
@@ -86,6 +86,9 @@ class PaymentController extends Controller
     foreach ($plates_id_final as $plate_id) {
 
       $plate_model_select = Plate::findOrFail($plate_id);
+      // ristorante a cui ordinano i piatti
+      $restoraunt_id = $plate_model_select['user_id'];
+      // dd($restoraunt, $plate_model_select);
       $delivery_cost = ($plate_model_select -> user -> delivery_cost);
 
       $discounted = $plate_model_select -> price * (100 - $plate_model_select -> discount);
@@ -115,29 +118,25 @@ class PaymentController extends Controller
     $newOrder = Order::make($data);
     $newOrder -> save();
     $newOrder -> plates() -> attach($plates_models_selected);
- 
-    return view('orders.order-show', compact('newOrder'));
-  }
+    $restoraunt = User::findOrFail($restoraunt_id);
 
-  public function pay() {
     $gateway = new \Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
         'merchantId' => config('services.braintree.merchantId'),
         'publicKey' => config('services.braintree.publicKey'),
         'privateKey' => config('services.braintree.privateKey')
     ]);
-    $email = "email utente";
 
     $token = $gateway->ClientToken()->generate();
 
-    return view('pagamento.payment', [
+
+    return view('orders.order-show', [
       'token' => $token,
-      'email' => $email
-    ]);
+    ], compact('newOrder', 'restoraunt', 'token'));
   }
 
-
   public function checkout(Request $request) {
+    // dd($request);
 
     $gateway = new \Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
@@ -145,45 +144,59 @@ class PaymentController extends Controller
         'publicKey' => config('services.braintree.publicKey'),
         'privateKey' => config('services.braintree.privateKey')
     ]);
-    // dd($request);
+    $payState = $_POST["payment_state"];
+    $order_id = $_POST["order_id"];
 
-    $emailPagamento = $_POST["email"];
-    $userMail = User::all() -> first() -> email;
+
+
+    // dd($payState, $request);
+
+    // dati pagante
+    $payingEmail = $_POST["email"];
+    $name = $_POST["name"];
+    $lastName = $_POST["last_name"];
+
+    // mail e nome del pagato(restourant)
+    $restEmail = $_POST["restourant-email"];
+    $restName = $_POST["restourant-name"];
     // mail del ristorante
     // dd($userMail);
 
-    $data = [];
-    // passaggio della mail utente
-    // dd($emailPagamento);
-
-    // invio mail al pagamento
-    Mail::to($userMail)->send(new PayMail($userMail));
-
-    // Mail::send('mail.mail_pagamento', $data, function($message) {
-    //   $message->from($userMail);
-    //   $message->to($emailPagamento);
-    // });
-
-
+    // $amount = floatval($_POST["amount"]);
     $amount = $_POST["amount"];
     $nonce = $_POST["payment_method_nonce"];
+    // dd($amount, $request);
+    // dd("dati pagante: ", $payingEmail, $name, $lastName , "dati rest: ", $restEmail, $restName);
+
+    // $user = Auth::user();
+
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
         'paymentMethodNonce' => $nonce,
         'customer' => [
-          'firstName' => 'Tony',
-          'lastName' => 'Stark',
-          'email' => 'tony@avengers.com'
+          'firstName' => $name,
+          'lastName' => $lastName,
+          // 'firstName' => 'topo',
+          // 'lastName' => 'gigio',
         ],
         'options' => [
-        'submitForSettlement' => true
+          // mettere true se si vuole mandare in autorizzato
+        'submitForSettlement' => false
         ]
     ]);
 
     if ($result->success) {
-        // header("Location: " . $baseUrl . "transaction.php?id=" . $transaction->id);
-        return back() -> with('success_message', 'transazione eseguita con successo.');
+        // invio mail al pagamento
+        Mail::to($payingEmail)->send(new PayMail($restEmail));
+        // dd($result);
+        $order = Order::findOrFail($order_id);
+        // dd($order["payment_state"]);
+        $order["payment_state"] = 1;
+        $order -> update();
+
+        // invio mail al pagamento
+        return redirect() -> route('index') -> with("success_message", "transazione eseguita con successo. Ti abbiamo inviato un' email di conferma");
     } else {
         $errorString = "";
 
@@ -193,7 +206,7 @@ class PaymentController extends Controller
 
         // $_SESSION["errors"] = $errorString;
         // header("Location: " . $baseUrl . "index.php");
-        return back() -> withErrors('An error occured with the message: ' . $result -> message);
+        return redirect() -> route('index') -> withErrors('An error occured with the message: ' . $result -> message);
     }
   }
 

@@ -1,15 +1,14 @@
 <template>
   <div class="restaurant_container">
     <a :href="restaurantShow">
-      <section class="img" :style="{'background-image':'url(' + url_img +')'}">
-
-      </section>
+      <section v-if="photo != null" class="img" :style="{'background-image':'url(' + url_img +')'}"></section>
+      <section v-else class="img" :style="{'background-image':'url(' + '/storage/placeholder.svg' + ')'}"></section>
 
       <section class="description">
-        <p>{{average_rate}}({{rate_number}})</p>
         <h2 class="title">{{name}}</h2>
-        <p>{{typologies_string}}</p>
-        <p>Consegna: {{delivery_cost/100}}€</p>
+        <p class="rate"><i class="far fa-star"></i>{{average_rate}}<span class="rate_number">({{rate_number}})</span></p>
+        <p class="typology">{{typologies_string}}</p>
+        <p class="delivery_cost">Consegna: {{delivery_cost/100}}€</p>
       </section>
     </a>
   </div>

@@ -14,12 +14,12 @@
             Crea un nuovo piatto
         </h1>
         <a href="{{ route('index') }}">
-            <img src="{{ asset('/images/deliveroo-logo.svg') }}" alt="">
+            <img src="{{ asset('storage/img/deliveroo-logo.svg') }}" alt="">
         </a>
     </header>
 
     <section class="form-block">
-        <img src="{{ asset('img/restaurants-dash.png') }}" alt="">
+        <img src="{{ asset('storage/img/restaurants-dash.png') }}" alt="">
         <form action="{{ route('plates-store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf

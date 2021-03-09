@@ -51,8 +51,9 @@
                 height: 40px;
                 border: 1px solid white; border-radius: 5px;
                 color: white;
+                padding: 0 5px;
                 background-color: #00ccbc;
-            
+                cursor: pointer;
     
                 &:hover{
                     background-color: #00c2b3;

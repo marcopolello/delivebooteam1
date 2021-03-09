@@ -19,20 +19,6 @@ class OrderController extends Controller
       $this->middleware('auth');
   }
 
-  public function index() {
-
-    $user = Auth::user();
-    return view('orders.orders-index', compact('user'));
-  }
-
-  public function show($id) {
-
-    $order = Order::findOrFail($id);
-    $order['total_price'] =  $order['total_price'] / 100;
-
-    return view('orders.order-show', compact('order'));
-  }
-
   public function restaurantOrder(){
     $user = Auth::user();
 

@@ -9,8 +9,6 @@
 
       <div class="col-md-12">
 
-      
-      
 
       <form action="{{ route('order-store') }}" method="post">
         @csrf
@@ -23,8 +21,8 @@
           </ul>
         @endforeach
 
-        Delivery cost: {{$data_array['delivery']}} <br> 
-        Total to pay: {{$data_array['topay'] + $data_array['delivery']}} 
+        Delivery cost: {{$data_array['delivery']}} <br>
+        Total to pay: {{$data_array['topay'] + $data_array['delivery']}}
         <br>
 
         @if ($errors->any())

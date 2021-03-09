@@ -3,24 +3,23 @@
   <div class="container">
 
       {{-- menu --}}
-          {{-- <ham-menu
+          <ham-menu
               :login = "'{{ route("login") }}'"
               :register = "'{{ route("register") }}'"
               :dashboard = "'{{ route("dashboard") }}'"
               :logout = "'{{ route("logout") }}'"
               :user = "'{{ Auth::user() }}'"
               >
-          </ham-menu> --}}
+          </ham-menu>
 
 
       {{-- logo --}}
       <a href="{{route('index')}}" class="logo">
-          <img src="storage/img/logo-teal.svg" alt="">
+          <img src="{{asset('storage/img/deliveroo-logo.svg')}}" alt="">
       </a>
 
-      {{-- search bar --}}
+      
       @include('components.search-bar')
-      {{-- <input class="search" type="text" placeholder="Piatti, ristoranti o tipi di cucina"> --}}
 
       {{-- cart --}}
       <a href="#" class="cart">

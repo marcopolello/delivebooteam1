@@ -6,9 +6,6 @@
   </head>
   <body>
     <h3>Ordini del ristorante: {{$user -> email}}</h3>
-    <h1>
-      <a href="{{ route('order-create')}}">CREA UN ORDINE FASULLO DA UTENTE REGISTYRATO X SE STESSO</a>
-    </h1>
 
     <h5>Ordini:</h5>
     <ul>

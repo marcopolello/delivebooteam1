@@ -8,9 +8,15 @@
 }
 
 .restaurant_container {
-  min-height: 15px;
-  margin-bottom: 10px;
-  font-size: 18px;
+  min-height: 13px;
+  width: 280px;
+  font-size: 16px;
+  padding: 10px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 
   & * {
     margin: 0;
@@ -18,23 +24,43 @@
   }
 
   section {
-    @include debug-border;
+    // @include debug-border;
   }
 
   .img{
     width: 260px;
     height: 150px;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 5px;
   }
   .description {
     width: 260px;
-    height: 200px;
+    height: 130px;
     padding: 5px;
 
     .title {
-      font-size: 1em;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .rate {
+      font-size: 0.9em;
+      font-style: italic;
+      color: $color_deliveroo;
+      .rate_number {
+        color: $soft-text;
+        padding: 3px;
+      }
+    }
+    .typology {
+      font-size: 0.9em;
+      color: $soft-text;
+    }
+    .delivery_cost {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: $soft-text;
     }
   }
 }

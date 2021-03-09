@@ -3,23 +3,10 @@
       <div ref="sideNav" class="bm-menu">
         <nav class="bm-item-list">
             <ul>
-              <!-- <li><a href="{{ __('Login') }}">Accedi</a></li> -->
-               <!-- @if (Auth::user())
-        
-                ciao
-                @else
-                  now  
-                @endif -->
                 
                 <span v-if="this.user">
                   <li><a :href="this.dashboard">Dashboard</a></li>
                   <li><a :href="this.logout">Logout</a></li>
-
-                    <!-- @if (Auth::user() -> photo)
-                    <img src="{{ asset('/storage/restaurant_icon/' . Auth::user() -> photo) }}" alt="">
-                    @else
-                    <img src="{{ asset('/images/user.svg') }}" alt="">
-                    @endif -->
                 </span>
 
                 <span v-else>
@@ -28,9 +15,6 @@
                   <li><a :href="this.login">Login</a></li>
 
                 </span>
-              <!-- <li><a :href="this.dashboard">Dashboard</a>
-              <li><a :href="this.register">Register</a></li>
-              <li><a :href="this.login">Login</a></li> -->
               
             </ul>
         </nav>
@@ -63,30 +47,28 @@
       data() {
         return {
           
-          login: this.login,
-          register: this.register,
-          dashboard: this.dashboard,
-          logout: this.logout,
-          user: this.user,
+          // login: this.login,
+          // register: this.register,
+          // dashboard: this.dashboard,
+          // logout: this.logout,
+          // user: this.user,
 
           isSideBarOpen: false,
         };
       },
       props: {
 
-        // route
         login: String,
         register: String,
         dashboard: String,
         logout: String,
-        user: Object
-  
+        user: ""
       },
+
       methods: {
         openMenu() {
           this.$emit('openMenu');
           this.isSideBarOpen = true;
-          console.log(this.$emit('openMenu'));
           if (!this.noOverlay) {
             document.body.classList.add('bm-overlay');
           }

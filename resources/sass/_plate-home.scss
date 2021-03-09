@@ -1,0 +1,102 @@
+@mixin flex-centratura {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin debug-border {
+  border: 1px solid black;
+}
+
+.home_plates {
+  display: flex;
+  flex-wrap: wrap;
+
+  .home_plate_container {
+    // @include debug-border;
+    min-height: 13px;
+    width: 280px;
+    font-size: 16px;
+    position: relative;
+    padding: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  & * {
+    margin: 0;
+    padding: 0;
+  }
+
+  section {
+    // @include debug-border;
+  }
+
+  .img{
+    width: 100%;
+    height: 150px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .description {
+    width: 100%;
+    height: 130px;
+    padding: 5px;
+
+    .title {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .price {
+      font-style: italic;
+      color: $color_deliveroo;
+      display: inline-block;
+      font-size: 1.2em;
+    }
+    .price.line {
+      text-decoration: line-through;
+      color: $soft-text;
+      font-size: 0.9em;
+    }
+    .discounted_price {
+      color: $color_deliveroo;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    .ingredients {
+      font-size: 0.8em;
+      color: $soft-text;
+    }
+    .plate_description {
+      font-size: 0.8em;
+      max-height: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .discount {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid yellow;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $discount-price;
+    color: white;
+    font-weight: bold;
+    transform: rotate(325deg);
+  }
+
+}

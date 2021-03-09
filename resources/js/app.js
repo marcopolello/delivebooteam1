@@ -12,24 +12,38 @@ function  init() {
        this.$nextTick(function () {
          console.log("App montata!");
          this.getRestaurantsInit();
+         // msg payment
+         this.messageVisible = true,
+         setTimeout(function(scope){
+           scope.messageVisible = false;
+         }, 5000, this);
        })},
       data: {
           restaurants: [],
+          plates: [],
           cart: [],
           order: [],
-          cacca: 100,
 
           // ricerca
           searchInput: "",
+          oldSearchInput: "",
           searchResult: [],
 
-          // flags
+          // search bar flags
           result_tendina: 0,
           no_result: 0,
           research_error: 0,
           research_category: 0,
           research_restaurants: 0,
           research_plates: 0,
+
+          messageVisible: '',
+          loading: 0,
+
+          // page flags
+          displayRestaurants: 1,
+          displayPlates: 0,
+
 
       },
       computed: {
@@ -91,12 +105,10 @@ function  init() {
       watch: {
         searchInput: function(newVal){
           if (newVal === "") {
-            this.research_error = 0;
             this.result_tendina = 0;
           }
         },
       },
-
       methods: {
 
         getRestaurantsInit: function(){
@@ -115,35 +127,41 @@ function  init() {
 
         startResearch: function(queries){
           console.log(queries);
+          this.oldSearchInput = queries;
+          this.loading = 1;
+          this.result_tendina = 1;
+          this.no_result = 0;
+          this.research_error = 0;
+          this.research_category = 0;
+          this.research_restaurants = 0;
+          this.research_plates = 0;
           axios.get('/search/' + queries, {
             params: {
             }
             })
             .then((response) => {
               this.searchResult = response.data;
-
+              this.$forceUpdate();
+              this.result_tendina = 1;
+              this.loading = 0;
               if (response.data.error) {
                 console.log(response.data.error);
                 this.research_error = 1;
+              } else if (
+                response.data.typology_resoult.length === 0 &&
+                response.data.rest_name_resoult.length === 0 &&
+                response.data.plates_resoult.length === 0
+              ) {
+                this.no_result = 1;
               } else {
-
-                if (this.searchResult.typology_resoult.length === 0) {
-                  this.research_category = 0;
-                } else {
+                if (this.searchResult.typology_resoult.length != 0) {
                   this.research_category = 1;
-                  this.result_tendina = 1;
                 }
-                if (this.searchResult.rest_name_resoult.length === 0) {
-                  this.research_restaurants = 0;
-                } else {
+                if (this.searchResult.rest_name_resoult.length != 0) {
                   this.research_restaurants = 1;
-                  this.result_tendina = 1;
                 }
-                if (this.searchResult.plates_resoult.length === 0) {
-                  this.research_plates = 0;
-                } else {
+                if (this.searchResult.plates_resoult.length != 0) {
                   this.research_plates = 1;
-                  this.result_tendina = 1;
                 }
               }
 
@@ -151,6 +169,57 @@ function  init() {
               console.log('T', this.search_typologies_result);
               console.log('R', this.search_rest_name_result);
               console.log('P', this.search_plate_name_result);
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+        },
+
+        changeRestResult: function(){
+          this.restaurants = this.search_typologies_result;
+          this.displayPlates = 0;
+          this.displayRestaurants = 1;
+          this.$forceUpdate();
+          this.closeSearchBar();
+        },
+
+        closeSearchBar: function(){
+          this.result_tendina = 0;
+          this.searchInput = "";
+        },
+
+        showRestByName: function(){
+          queries = this.oldSearchInput;
+          axios.get('/getallrestbyname/' + queries, {
+            params: {
+            }
+            })
+            .then((response) => {
+              console.log('allbyname', response.data);
+              this.restaurants = response.data;
+              this.displayPlates = 0;
+              this.displayRestaurants = 1;
+              this.$forceUpdate();
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+          this.closeSearchBar();
+        },
+
+        showPlatesbyName: function(){
+          this.displayRestaurants = 0;
+          this.displayPlates = 1;
+          this.closeSearchBar();
+          queries = this.oldSearchInput;
+          axios.get('/getallplatebyname/' + queries, {
+            params: {
+            }
+            })
+            .then((response) => {
+              console.log("all plates ->", response.data);
+              this.plates = response.data;
+              this.$forceUpdate();
             })
             .catch(function (error) {
               console.log(error);
@@ -165,8 +234,6 @@ function  init() {
           this.cart = [];
           this.cart_new = [];
         },
-
-
 
         get_cart: function() {
 
@@ -189,15 +256,18 @@ function  init() {
                 });
         },
 
+        plate_final_price: function(price, discount) {
+          if (discount > 0) {
+            let sconto_euro = (discount * price / 100) / 100;
+            price = price / 100;
+            return (price - sconto_euro).toFixed(2);
+          } else {
+            return price / 100;
+          }
+        },
+
       },
   });
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-// menu hamburger dashboard
-// const menu_btn = document.querySelector('.sidebar');
-// menu_btn.addEventListener('click', function () {
-//     menu_btn.classList.toggle('is-active');
-// });
-
