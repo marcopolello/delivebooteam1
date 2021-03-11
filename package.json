@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.2",
+        "chart.js": "^2.9.4",
         "font-awesome": "^4.7.0"
     }
 }

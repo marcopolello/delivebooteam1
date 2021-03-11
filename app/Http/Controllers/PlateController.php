@@ -24,10 +24,14 @@ class PlateController extends Controller
   }
 
   public function platesCreate() {
+    $user = Auth::user();
+    $email_user = $user -> email;
+    $word = '@';
+    $mail_cut = substr($email_user, 0, strpos($email_user, $word));
 
     $categories = Category::all();
 
-    return view('plates.plate-create', compact('categories'));
+    return view('plates.plate-create', compact('categories', 'mail_cut'));
   }
 
   public function plateStore(Request $request) {
@@ -42,7 +46,9 @@ class PlateController extends Controller
       $data['availability'] = 0;
     }
 
-
+    if ($data['price_cents'] == '00') {
+      $data['price_cents'] = 0;
+    }
 
     // trasformo il prezzo da due valori ad un valore
     $plate_price = ($data['price_euro'] * 100) + $data['price_cents'];
@@ -69,7 +75,7 @@ class PlateController extends Controller
 
     $plate -> price = $plate_price;
 
-    // foto 
+    // foto
     if (array_key_exists('img', $data)) {
 
       $img = $request -> file('img');
@@ -90,7 +96,7 @@ class PlateController extends Controller
 
     $user = Auth::user() -> id;
     $plate -> user() -> associate($user);
-    
+
     $plate -> save();
 
     return redirect() -> route('plates-index');
@@ -113,6 +119,10 @@ class PlateController extends Controller
 
     if (!array_key_exists('availability', $data)) {
       $data['availability'] = 0;
+    }
+
+    if ($data['price_cents'] == '00') {
+      $data['price_cents'] = 0;
     }
 
     Validator::make($data, [
@@ -138,13 +148,13 @@ class PlateController extends Controller
     if (array_key_exists('img', $data)) {
       $this -> updateImgPlate($request -> file('img'), $id);
       unset($data['img']);
-    }   
+    }
 
     $plate -> update($data);
 
     $category = Category::findOrFail($data['category_id']);
     $plate -> category() -> associate($category);
-    
+
     $plate -> save();
 
     return redirect() -> route('plates-index');

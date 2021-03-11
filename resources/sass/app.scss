@@ -6,14 +6,18 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap'; 
 
 // Fontawesome
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+@import 'welcome';
+@import 'carousel';
+@import 'pay';
+
 // other
 @import 'plate';
-@import 'plate_create';
+@import 'plate_create_and_edit';
 @import 'cart';
 @import 'search-bar';
 
@@ -23,22 +27,33 @@
 
 @import 'restaurant';
 @import 'edit_restaurant';
+@import 'restaurant-show';
 
 // nuovi file scss, commento da cencellare è solo un promemoria
 @import 'header';
+@import 'footer';
 // @import 'jumbotron';
 @import 'home';
 @import 'animations';
 
+
 @import 'welcome';
 @import 'carousel';
+@import 'order';
 @import 'pay';
+
 
 // auth
 @import 'auth';
 @import 'register';
 @import 'login';
 @import 'email';
+
+//stats
+@import 'statistics';
+
+//feedbacks
+@import 'feedbacks';
 
 
 * {
@@ -51,7 +66,11 @@
   position: fixed;
   top: 0;
   width: 100%;
-  height: 40px;
+  height: 60px;
   padding: 10px;
   z-index: 999;
+}
+
+.scroll-hide {
+  overflow: hidden !important;
 }

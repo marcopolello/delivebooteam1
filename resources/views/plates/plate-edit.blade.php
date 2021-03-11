@@ -12,7 +12,7 @@
     <header class="header-plate">
         <h1>
             Modifica piatto:
-            <span>{{ $plate -> plate_name }}</span>
+            <span id="name-plate">{{ $plate -> plate_name }}</span>
         </h1>
         <a href="{{ route('index') }}">
             <img src="{{ asset('storage/img/deliveroo-logo.svg') }}" alt="">
@@ -36,19 +36,24 @@
                 </div>
             @endif
 
+
+            <h6>* I campi contrassegnati sono obbligatori</h6>
             <div class="textbox">
-                <label for="plate_name" >Nome piatto</label>
+                <label class="required" for="plate_name" >Nome piatto</label>
+
                 <input name='plate_name' value="{{$plate -> plate_name}}" type="text" required maxlength="30">
             </div>
 
             <div class="textbox">
-                <label for="ingredients">Ingredienti:</label>
+
+                <label class="required" for="ingredients">Ingredienti:</label>
+
                 <input name='ingredients' value="{{$plate -> ingredients}}" type="textbox" required minlength="2" maxlength="2000">
             </div>
 
             <div class="textbox">
                 <label for="description">Descrizione:</label>
-                <textarea name='description' rows="3" cols="80" value="{{$plate -> description}}" type="text" minlength="2" maxlength="255"></textarea>
+                <textarea name='description' rows="3" cols="80" value="{{$plate -> description}}" type="text" minlength="2" maxlength="255">{{$plate -> description}}</textarea>
             </div>
 
             @php
@@ -57,12 +62,14 @@
             @endphp
 
             <div class="textbox">
-                <label for="price_euro">Prezzo (EURO):</label>
+
+                <label class="required" for="price_euro">Prezzo (EURO):</label>
+
                 <input name='price_euro' value="{{$price_euro}}" type="number" min="0" max="9999">
             </div>
 
             <div class="textbox">
-                <label for="price_cents">Prezzo (CENTESIMI):</label>
+                <label class="required" for="price_cents">Prezzo (CENTESIMI):</label>
                 <input name='price_cents' value="{{$price_cents}}" type="number" min="0" max="99">
             </div>
 
@@ -85,7 +92,7 @@
             </div>
 
             <div class="textbox-discount">
-                <label for="discount">Sconto in percentuale:</label>
+                <label class="required" for="discount">Sconto in percentuale:</label>
                 <input name='discount' value="{{$plate -> discount}}" type="number" required min="0" max="100">
             </div>
 
@@ -109,22 +116,24 @@
             <div class="img-box">
                 <label for="img">Foto</label>
                 <input name='img' type="file">
+                <br>
+                <a href="{{ route('plate-delete-img', $plate -> id) }}" class="btn btn-danger">Rimuovi foto piatto</a>
+            </div>
+
+            <div class="img-position">
+                @if ($plate -> img)
+                    @php
+                    $photoUrl = '/storage/plates/' . $plate -> img;
+                    @endphp
+                    <h3>Immagine del piatto</h3>
+                    <img id="img-plate" src="{{ asset($photoUrl) }}" alt="">
+                @endif
             </div>
 
             <div class="button-save">
-                <input type="submit" value="Update">
+                <input type="submit" value="Aggiorna">
             </div>
         </form>
-
-        <a href="{{ route('plate-delete-img', $plate -> id) }}" class="btn btn-danger">Rimuovi foto piatto</a>
-
-        @if ($plate -> img)
-            @php
-                $photoUrl = '/storage/plates/' . $plate -> img;
-            @endphp
-            <h3>Foto del piatto</h3>
-            <img class="propic-user" src="{{asset($photoUrl)}}" alt="">
-        @endif
 
     </section>
 </body>

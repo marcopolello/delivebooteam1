@@ -40,6 +40,8 @@
       {{-- fine session msg a comparsa del payment --}}
 
       @include('components.header')
+      @include('components.header-no-search')
+
       @yield('content')
 
     </div>

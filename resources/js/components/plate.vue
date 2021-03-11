@@ -13,17 +13,23 @@ cut del testo da vue (ok ma non va da responsive) -->
     <div class="plate_text" @click="display_details_method">
       <h2 class="title">{{nome}}</h2>
       <p class="descrizione">{{descrizione_short}}</p>
-      <span :class="['prezzo_intero' ,{'prezzo_barrato': this.sconto > 0}]">{{prezzo_euro}}€</span>
-      <span v-if="this.sconto > 0" class="prezzo_scontato">{{prezzo_sconto}}€</span>
+      <div class="prices">
+        <span :class="['prezzo_intero' ,{'prezzo_barrato': this.sconto > 0}]">{{prezzo_euro}}€</span>
+        <span v-if="this.sconto > 0" class="prezzo_scontato">{{prezzo_sconto}}€</span>
+      </div>
     </div>
 
-    <div class="plate_img" @click="display_details_method"
+    <div v-if="immagine != null" class="plate_img" @click="display_details_method"
       :style="{'background-image':'url(' + url_img +')'}">
+      <span v-if="this.sconto > 0" class="sconto">{{sconto}}%</span>
+    </div>
+    <div v-else class="plate_img" @click="display_details_method"
+      style="background-image: url(/storage/placeholder.svg)">
       <span v-if="this.sconto > 0" class="sconto">{{sconto}}%</span>
     </div>
 
     <div v-if="this.disponibile == 0" class="plate_esaurito">
-      <p>Esaurito</p>
+      <img src="/storage/img/sold-out.png" alt="">
     </div>
 
       <!-- Dettagli al click -->
@@ -38,21 +44,25 @@ cut del testo da vue (ok ma non va da responsive) -->
           </section>
 
           <section class="show">
-            <div class="plate_img" :style="{'background-image':'url(' + url_img +')'}">
+
+            <div v-if="immagine != null" class="plate_img" :style="{'background-image':'url(' + url_img +')'}"></div>
+            <div class="plate_img" style="background-image: url(/storage/placeholder.svg)"></div>
+
+            <div class="plate_detail_info">
+              <p class="descrizione">{{descrizione}}</p>
+              <p>Ingredienti: <br> {{ingredienti}}</p>
             </div>
-            <p class="descrizione">{{descrizione}}</p>
-            <p>Ingredienti: <br> {{ingredienti}}</p>
 
             <div class="quantity_pannel">
 
               <div class="remove_plate" @click="remove_quantity">
-                -
+                <i class="far fa-minus-square change_quantity"></i>
               </div>
               <div class="quantity">
                 <span>{{ quantity }}</span>
               </div>
               <div class="add_plate" @click="add_quantity">
-                +
+                <i class="far fa-plus-square change_quantity"></i>
               </div>
 
             </div>
@@ -63,7 +73,7 @@ cut del testo da vue (ok ma non va da responsive) -->
               <span>Cancella</span>
             </div>
 
-            <div 
+            <div
               @click="pushItemInCart()"
               class="button button-strong">
               <strong>TOTALE {{ total_price }}€</strong>
@@ -115,7 +125,7 @@ cut del testo da vue (ok ma non va da responsive) -->
             let sconto_euro = (this.sconto * this.prezzo_euro / 100).toFixed(2);
             return (this.prezzo_euro - sconto_euro).toFixed(2);
           } else {
-            return "Prezzo intero";
+            return this.prezzo_euro;
           }
         },
 
@@ -138,12 +148,15 @@ cut del testo da vue (ok ma non va da responsive) -->
       },
 
       mounted() {
-          console.log('Plate mounted');
+          // console.log('Plate mounted');
+          // console.log(this.delivery_cost);
           // console.log(this.plate_data);
+          // console.log(this.immagine);
       },
 
       props: {
-        plate_data: Object
+        plate_data: Object,
+        delivery_cost: Number
       },
 
       watch: {
@@ -161,31 +174,38 @@ cut del testo da vue (ok ma non va da responsive) -->
         },
 
         close_details: function(){
-          this.quantity = 1;
+          // this.quantity = 1;
           this.display_details = false;
+          $("body").removeClass("scroll-hide");
         },
 
         display_details_method: function() {
           if (this.disponibile) {
             this.display_details = true;
+            $("body").addClass("scroll-hide");
           }
         },
 
         pushItemInCart: function() {
-          
+
           let plate = {};
-          
+
           for (let i = 0; i < this.quantity; i++) {
-            
+
             plate = {
               "plate_id": this.plate_id,
               "plate_price" : this.prezzo_sconto,
-              "plate_name": this.nome, 
+              "plate_name": this.nome,
+              "delivery_cost": this.delivery_cost,
+              "original_price": this.prezzo_sconto,
             };
 
             this.$emit('carrello', plate);
-          }          
-        }, 
+            this.close_details();
+          }
+        },
+
       },
+
     }
 </script>

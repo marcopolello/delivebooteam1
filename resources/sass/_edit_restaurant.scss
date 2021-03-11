@@ -27,6 +27,13 @@
 //     }
 // }
 
+.container-restaurant{
+    #search-bar,
+    .cart{
+        display: none;
+    }
+}
+
 .sides-flex-edit-restaurant {
     width: 80%;
     display: flex;

@@ -9,7 +9,8 @@
                         <div v-for="item in items"
                             :key="item.id">
 
-                            <div class="card-carousel--card">
+                            <div class="card-carousel--card" 
+                                @click='$root.startResearchSlider(item.link)'>
                                 <img :src="item.tag" alt="">
                             </div>
 
@@ -44,15 +45,14 @@
             windowSize: 6,
             paginationFactor: 200,
             items: [
-                {name: 'offers', tag: 'storage/img/offers.png'},
-                {name: 'organic', tag: 'storage/img/organic.png'},
-                {name: 'kebab', tag: 'storage/img/kebab.png'},
-                {name: 'burgers', tag: 'storage/img/burgers-1.png'},
-                {name: 'dessert', tag: 'storage/img/dessert.png'},
-                {name: 'ice-cream', tag: 'storage/img/ice-cream.png'},
-                {name: 'pizza', tag: 'storage/img/pizza.png' },
-                {name: 'poke', tag: 'storage/img/poke.png'},
-                {name: 'sushi', tag: 'storage/img/sushi-1.png'},
+                {link: 'italiano', name: 'Italiano', tag: 'storage/img/organic.png'},
+                {link: 'kebab', name: 'Kebab', tag: 'storage/img/kebab.png'},
+                {link: 'burger', name: 'Burgers', tag: 'storage/img/burgers-1.png'},
+                {link: 'dessert', name: 'Dessert', tag: 'storage/img/dessert.png'},
+                {link: 'frappe', name: 'Frappè', tag: 'storage/img/ice-cream.png'},
+                {link: 'pizza', name: 'Pizza', tag: 'storage/img/pizza.png' },
+                {link: 'poke', name: 'Pokè', tag: 'storage/img/poke.png'},
+                {link: 'sushi', name: 'Sushi', tag: 'storage/img/sushi-1.png'},
             ],
             plate: this.platename,
           }
@@ -75,7 +75,7 @@
             },
             print() {
               console.log(this.plate);
-            }
+            },
         },
         props: {
           platename: Array,

@@ -1,31 +1,69 @@
+.header-dashboard-responsive {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 80px;
+  margin: 0 auto;
+
+  svg {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .logo {
+
+    img {
+
+      width: 150px;
+      height: auto;
+    }
+  }
+}
+
 .container-dashboard {
     display: flex;
     justify-content: space-between;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
 }
 
 .left-side-dash {
     display: flex;
     flex-direction: column;
-    width: 20%;
-    height: auto;
-    overflow: auto;
+    width: 300px;
+    flex-shrink: 0;
+    min-height: 100vh;
     background-color: $color_deliveroo;
-    padding-left: 2rem;
-    padding-top: 3rem;
-    padding-right: 2rem;
-    display: block;
-    @media all and (min-width: 868px) and (max-width: 1199px) {
-        width: 30%;
+    padding: 8px 20px;
+    position: relative;
+
+    .close-dash-menu {
+      display: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+
+      i {
+        font-size: 30px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
     }
 
-    @media all and (min-width: 576px) and (max-width: 867px) {
+    @media all and (max-width: 867px) {
         display: none;
-    }
+        width: 100%;
+        min-height: 100vh;
 
-    @media all and (max-width: 575px) {
-        display: none;
+        .close-dash-menu {
+          display: block;
+        }
     }
 
     .img-user {
@@ -33,9 +71,12 @@
         justify-content: center;
         width: 125px;
         height: 125px;
+        flex-shrink: 0;
         margin: 20px auto;
         border-radius: 50%;
         border: 2px solid $variable2;
+        background-size: cover;
+        background-position: center;
 
         @media all and (min-width: 1200px) and (max-width: 1600px) {
             width: 100px;
@@ -49,8 +90,8 @@
         }
 
         @media all and (min-width: 576px) and (max-width: 867px) {
-            width: 50px;
-            height: 50px;
+            width: 120px;
+            height: 120px;
         }
 
 
@@ -95,12 +136,12 @@
 
     .buttons-left-dash {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
-        padding-top: 3rem;
+        padding-top: 20px;
 
         h4 {
-            margin-top: 2.5rem;
+            // margin-top: 2.5rem;
             // margin-left: 1.5rem;
             text-transform: uppercase;
             font-weight: bold;
@@ -160,13 +201,18 @@
 
         }
 
+        button:disabled {
+            background-color: rgb(202, 202, 202);
+            color: rgb(107, 107, 107);
+        }
+
         a {
             width: 100%;
             font-size: 16px;
             text-transform: uppercase;
             border-radius: $border_button;
             box-shadow: $shadow_button;
-            margin: 100px 0 50px 0;
+            margin: 25px 0;
         }
 
     }
@@ -175,30 +221,26 @@
 .right-side-dash {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: calc(100% - 300px);
     height: auto;
     overflow: auto;
     background-color: white;
     padding: 0 2rem;
 
-    @media all and (min-width: 868px) and (max-width: 1199px) {
-        width: 70%;
-    }
-
-    @media all and (min-width: 576px) and (max-width: 867px) {
+    @media all and (max-width: 867px) {
         width: 100%;
+        .header-dashboard-responsive {
+          display: flex;
+        }
+        #header-no-search {
+          display: none;
+        }
     }
-
-    @media all and (max-width: 575px) {
-        width: 100%;
-    }
-
-
 
     .header-right-dash {
         display: flex;
         justify-content: space-between;
-        padding-top: 3rem;
+        padding-top: 15px;
 
         & > h3 {
 
@@ -274,7 +316,7 @@
             height: 500px;
             border-radius: $border-card;
             box-shadow: $shadow_button;
-            margin: 50px 0px;
+            margin: 15px 0px;
             padding: 15px;
 
             @media all and (min-width: 1200px) and (max-width: 1600px) {
@@ -343,8 +385,11 @@
                 }
             }
 
-            .graph-chart-js > h3 {
-                text-align: center;
+            .graph-chart-js {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
             }
 
             .percentual-feed {
@@ -421,6 +466,37 @@
         }
     }
 
+    .card-feed {
+
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .mini-card-feed {
+            width: calc(100% / 4);
+            margin: 10px auto;
+            padding: 20px;
+            height: 200px;
+            background-color: $color_deliveroo;
+            color: $variable2;
+            border-radius: $border-card;
+            box-shadow: $shadow_button;
+
+            .feedbacks-cards {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            @media all and (min-width: 1200px) and (max-width: 1600px) {
+
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+
+    }
 
     .last-order {
         width: 100%;
@@ -570,4 +646,12 @@
 .footer-dash button:hover {
     color: $variable1;
     box-shadow: $shadow_button;
+}
+
+// MI DISSOCIO DAL QUANTITATIVO ENORME DI RIGHE IN QUESTO FILE
+.myactive {
+  display: flex;
+}
+.disabled {
+  display: none;
 }

@@ -47,6 +47,7 @@ class PaymentController extends Controller
     $data_array['plates'] = $plates_selected;
     $data_array['topay'] = $to_pay;
     $data_array['delivery'] = $delivery_cost;
+    $data_array['plateselect'] = $plate_select;
 
     session() -> flash('data', $data_array);
 
@@ -129,14 +130,20 @@ class PaymentController extends Controller
 
     $token = $gateway->ClientToken()->generate();
 
+    session() -> flash('correctOrder', $newOrder);
+
 
     return view('orders.order-show', [
       'token' => $token,
     ], compact('newOrder', 'restoraunt', 'token'));
   }
 
-  public function checkout(Request $request) {
+  // CHECKOUT PAGAMENTO
+  public function checkout(Request $request, $id) {
     // dd($request);
+    // session() -> keep(['correctOrder']);
+    // $correctOrder = session() -> get('correctOrder');
+    // $request->session()->reflash();
 
     $gateway = new \Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
@@ -144,10 +151,6 @@ class PaymentController extends Controller
         'publicKey' => config('services.braintree.publicKey'),
         'privateKey' => config('services.braintree.privateKey')
     ]);
-    $payState = $_POST["payment_state"];
-    $order_id = $_POST["order_id"];
-
-
 
     // dd($payState, $request);
 
@@ -165,49 +168,58 @@ class PaymentController extends Controller
     // $amount = floatval($_POST["amount"]);
     $amount = $_POST["amount"];
     $nonce = $_POST["payment_method_nonce"];
-    // dd($amount, $request);
     // dd("dati pagante: ", $payingEmail, $name, $lastName , "dati rest: ", $restEmail, $restName);
 
-    // $user = Auth::user();
+    $order = Order::findOrFail($id);
+    $orderFloat = $order['total_price'] / 100;
+    $amountFloat = floatval($amount);
+    // dd(gettype($amount), floatval($amount), $request, $orderFloat);
+    if ($orderFloat == $amountFloat) {
+      $result = $gateway->transaction()->sale([
+          'amount' => $amount,
+          'paymentMethodNonce' => $nonce,
+          'customer' => [
+            'firstName' => $name,
+            'lastName' => $lastName,
+            // 'firstName' => 'topo',
+            // 'lastName' => 'gigio',
+          ],
+          'options' => [
+            // mettere true se si vuole mandare in autorizzato
+          'submitForSettlement' => true
+          ]
+      ]);
 
+      if ($result->success) {
+          // invio mail al pagamento
+          Mail::to($payingEmail)->send(new PayMail($payingEmail));
+          // dd($result);
+          $order = Order::findOrFail($id);
+          // dd($order["payment_state"]);
+          $order["payment_state"] = 1;
+          $order -> update();
 
-    $result = $gateway->transaction()->sale([
-        'amount' => $amount,
-        'paymentMethodNonce' => $nonce,
-        'customer' => [
-          'firstName' => $name,
-          'lastName' => $lastName,
-          // 'firstName' => 'topo',
-          // 'lastName' => 'gigio',
-        ],
-        'options' => [
-          // mettere true se si vuole mandare in autorizzato
-        'submitForSettlement' => false
-        ]
-    ]);
+          // invio mail al pagamento
+          return redirect() -> route('index') -> with("success_message", "transazione eseguita con successo. Ti abbiamo inviato un' email di conferma");
+      } else {
+          $errorString = "";
 
-    if ($result->success) {
-        // invio mail al pagamento
-        Mail::to($payingEmail)->send(new PayMail($restEmail));
-        // dd($result);
-        $order = Order::findOrFail($order_id);
-        // dd($order["payment_state"]);
-        $order["payment_state"] = 1;
-        $order -> update();
+          foreach($result->errors->deepAll() as $error) {
+              $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+          }
 
-        // invio mail al pagamento
-        return redirect() -> route('index') -> with("success_message", "transazione eseguita con successo. Ti abbiamo inviato un' email di conferma");
+          // $_SESSION["errors"] = $errorString;
+          // header("Location: " . $baseUrl . "index.php");
+          return redirect() -> route('index') -> withErrors('An error occured with the message: ' . $result -> message);
+      }
     } else {
-        $errorString = "";
-
-        foreach($result->errors->deepAll() as $error) {
-            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-        }
-
-        // $_SESSION["errors"] = $errorString;
-        // header("Location: " . $baseUrl . "index.php");
-        return redirect() -> route('index') -> withErrors('An error occured with the message: ' . $result -> message);
+      return redirect() -> route('fail') -> with("error_message", "ci dispiace molto, la transazione non è andata a buon fine, riprova e sarai più fortunato ;D");
     }
+
+  }
+
+  public function fail() {
+    return view('orders.fail-order');
   }
 
 

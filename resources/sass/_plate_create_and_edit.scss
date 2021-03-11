@@ -54,6 +54,11 @@
             font-size: 12px;
         }
 
+        & > #name-plate {
+            color: $color_text_3;
+        }
+
+
 
     }
 
@@ -82,7 +87,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: auto;
     padding: 25px 50px;
     background-color: $color_deliveroo_2;
 
@@ -102,7 +106,7 @@
         padding: 25px 20px;
     }
 
-    img {
+    & > img {
         position: absolute;
         top: 15%;
         right: 12%;
@@ -442,7 +446,28 @@
             font-size: 12px;
         }
     }
+
+    a {
+        margin-top: 15px;
+
+        @media all and (max-width: 440px) {
+            width: 150px;
+            height: 35px;
+        }
+    }
 }
+
+.img-position {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    & > #img-plate {
+        width: 240px;
+    }
+}
+
+
 
 .button-save {
     margin-top: 35px;

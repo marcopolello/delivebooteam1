@@ -12,12 +12,27 @@ $light-gray: #f8f8f8;
     justify-content: center;
     margin: 20px 0 40px;
     color: $gray;
+    position: relative;
+
+    .card-carousel--nav__left {
+        position: absolute;
+        top: 25%;
+        left: 0px;
+        z-index: 99;
+    }
+
+    .card-carousel--nav__right {
+        position: absolute;
+        top: 25%;
+        right: 0px;
+        z-index: 99;
+    }
 }
 
 .card-carousel {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: calc( 100% - 60px);
 
     &--overflow-container {
         overflow: hidden;
@@ -25,7 +40,7 @@ $light-gray: #f8f8f8;
 
     &--nav__left,
     &--nav__right {
-        display: inline-block;
+        // display: inline-block;
         width: 30px;
         height: 30px;
         padding: 10px;
@@ -101,3 +116,17 @@ $light-gray: #f8f8f8;
         }
     }
 }
+
+@media screen and(max-width: 600px) {
+
+    .card-carousel-wrapper {
+
+        .card-carousel--nav__left {
+            left: 50px;
+        }
+
+        .card-carousel--nav__right {
+            right: 50px;
+        }
+    }
+  }

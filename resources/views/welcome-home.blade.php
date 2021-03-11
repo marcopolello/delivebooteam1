@@ -2,20 +2,23 @@
 
 @section('content')
 
+  <div class="header-responsive-home">
+    @include('components.search-bar')
+  </div>
+  
     {{-- MAIN --}}
     <main>
 
-        <div class="container">
+        <div class="main-container-welcome">
 
             <slider></slider>
 
             {{-- lista ristoranti --}}
           <section v-if="displayRestaurants">
-              <h1>Restaurants</h1>
 
-              <div class="restaurants">
+              <div class="all-restaurants">
 
-                <div  v-for="restaurant in restaurants" :key="restaurant.id">
+                <div class="restaurant" v-for="restaurant in restaurants" :key="restaurant.id">
                     {{-- <p>@{{restaurant}}</p> --}}
                     <restaurant
                       :restaurant_data="restaurant"
@@ -23,6 +26,7 @@
                 </div>
 
               </div>
+                  
           </section>
 
           <section v-if="displayPlates">
@@ -57,35 +61,6 @@
         </div>
 
     </main>
+    @include('components.footer')
 
-    {{-- FOOTER --}}
-    <footer>
-        <div class="container">
-            <nav>
-                <ul>
-                    <li>Scopri deliveroo</li>
-                    <li><a href="#">asdfghjkl</a></li>
-                    <li><a href="#">asdfghjkl</a></li>
-                    <li><a href="#">asdfghjkl</a></li>
-                </ul>
-
-                <ul>
-                    <li>FAQ</li>
-                    <li><a href="#">asdfghjkl</a></li>
-                    <li><a href="#">asdfghjkl</a></li>
-                    <li><a href="#">asdfghjkl</a></li>
-                </ul>
-
-                <ul>
-                    <li>Aiuto</li>
-                    <li><a href="#">asdfghjkl</a></li>
-                    <li><a href="#">asdfghjkl</a></li>
-                    <li><a href="#">asdfghjkl</a></li>
-                </ul>
-
-            </nav>
-
-            <div class="copyright">copyright</div>
-        </div>
-    </footer>
 @endsection

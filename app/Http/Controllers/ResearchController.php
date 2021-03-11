@@ -268,7 +268,7 @@ class ResearchController extends Controller
           $restaurants[$key] -> average_rate = $average;
           $restaurants[$key] -> rate_number = count($votes);
         } else {
-          $restaurants[$key] -> average_rate = 'no-info';
+          $restaurants[$key] -> average_rate = '0';
           $restaurants[$key] -> rate_number = '0';
         }
 

@@ -195,5 +195,6 @@ return [
     */
 
     'same_site' => 'lax',
+    'expire_on_close' => false,
 
 ];

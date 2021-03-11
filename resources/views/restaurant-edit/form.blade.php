@@ -17,7 +17,7 @@
         </div>      
         @else
         {{-- <img src="{{ asset('/images/user.svg') }}" alt=""> --}}
-        <div class="restaurant-image" style="background-image: url({{asset('/images/user.svg')}})">
+        <div class="restaurant-image" style="background-image: url({{asset('/storage/user.svg')}})">
         </div>
         @endif
   

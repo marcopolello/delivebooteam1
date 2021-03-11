@@ -6,31 +6,59 @@
   </head>
   <style media="screen">
     body{
-      background-color: blue;
+      background-image: url(https://www.datocms-assets.com/15991/1581672962-roothumbnail.png?auto=format);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .mail-contain{
+      text-align: justify;
+      padding: 0 5%;
+      font-family: $font-family-sans-serif;
+    }
+    ul{
+      padding-left: 1%;
     }
   </style>
   <body>
 
-    <h1>Gentile {{ $user -> name }},</h1>
+    <div class="mail-back">
 
-    <p>
-      il tuo account Deliveboo è stato creato. Ti ricordiamo la email che hai scelto in fase di registrazione: <br>
-      <h4>{{$user -> email}}</h4>
-      Ora che sei registrato, potrai amministrare la tua attività nella tua
-      home personale. <br>
-      Un piccolo recapito degli altri dati con cui ti sei registrato: <br>
-      - {{$user -> address}} <br>
-      - {{$user -> phone}} <br>
-      - {{$user -> piva}} <br>
-      - {{$user -> delivery_cost}} <br>
+      <div class="mail-contain">
 
+        <h1>Gentile {{ $user -> name }},</h1>
 
-      Cordiali saluti, <br>
-      Team 1
-    </p>
+        <span>
+          <h2>il tuo account Deliveboo è stato creato. </h2>
+          <h3>
+            Ti ricordiamo la email che hai scelto in fase di registrazione:
+          </h3>
 
+          <h2>{{$user -> email}}</h2>
 
+          <h3>
+            Ora che sei registrato, potrai amministrare la tua attività nella tua
+            home personale.
+          </h3>
+          <h3>
+            Un piccolo recapito degli altri dati con cui ti sei registrato:
+          </h3>
+          <div>
+            <h3>Indirizzo: {{$user -> address}} </h3>
+            <h3>Recapito telefonico: {{$user -> phone}} </h3>
+            <h3>la tua Partita Iva: {{$user -> piva}} </h3>
+            <h3>costo di spedizione impostato: {{$user -> deh3very_cost / 10}} €</h3>
+          </div>
 
+          <h2>
+            Cordiali saluti, <br>
+            Team 1
+          </h2>
+
+        </span>
+
+      </div>
+
+    </div>
 
   </body>
 </html>

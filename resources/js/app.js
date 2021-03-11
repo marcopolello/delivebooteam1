@@ -10,7 +10,7 @@ function  init() {
       el: '#app',
       mounted: function () {
        this.$nextTick(function () {
-         console.log("App montata!");
+         // console.log("App montata!");
          this.getRestaurantsInit();
          // msg payment
          this.messageVisible = true,
@@ -44,39 +44,40 @@ function  init() {
           displayRestaurants: 1,
           displayPlates: 0,
 
-
       },
       computed: {
 
         cart_new: function() {
 
-          let cart_order = [];
-          this.cart.forEach(element => {
+          //Controllo cart e conta gli elementi uguali.
+          //Ne lascia solo uno ma con le proprietà cambiate (quantity, plate_price).
 
-            if(!cart_order.some(plate => plate.plate_id == element.plate_id)) {
+          let newCart = [];
+          this.cart.forEach((plate, i) => {
+            //conto dei piatti uguali
+            let counter = 0;
+            this.cart.forEach((plate_confronto, i) => {
 
-              let new_element = element;
-              new_element['quantity'] = 1;
-              cart_order.push(new_element);
-
-            } else {
-
-              for(let i=0; i<cart_order.length; i++) {
-
-                if(cart_order[i].plate_id == element.plate_id) {
-
-                  cart_order[i].quantity++;
-
-                  cart_order[i].plate_price = parseFloat(cart_order[i].quantity).toFixed(2) *
-                  parseFloat(element.plate_price).toFixed(2);
-
-                  cart_order[i].plate_price = cart_order[i].plate_price.toFixed(2);
+                if (plate.plate_id == plate_confronto.plate_id) {
+                  counter++;
                 }
-              }
+            });
+            if (!newCart.some(plate_new_cart => plate_new_cart.plate_id == plate.plate_id)) {
+              newCart.push(
+                {
+                  "plate_id": plate.plate_id,
+                  "original_price": plate.original_price,
+                  "plate_price": (parseFloat(counter) * parseFloat(plate.original_price)).toFixed(2),
+                  "plate_name": plate.plate_name,
+                  "delivery_cost": plate.delivery_cost,
+                  "quantity": counter,
+                }
+              );
             }
+
           });
 
-          return cart_order;
+          return newCart;
         },
 
         total: function() {
@@ -117,7 +118,7 @@ function  init() {
             }
             })
             .then((response) => {
-              console.log('Primi ristoranti casuali: ', response.data.restaurants);
+              // console.log('Primi ristoranti casuali: ', response.data.restaurants);
               this.restaurants = response.data.restaurants;
             })
             .catch(function (error) {
@@ -145,7 +146,7 @@ function  init() {
               this.result_tendina = 1;
               this.loading = 0;
               if (response.data.error) {
-                console.log(response.data.error);
+                // console.log(response.data.error);
                 this.research_error = 1;
               } else if (
                 response.data.typology_resoult.length === 0 &&
@@ -165,10 +166,10 @@ function  init() {
                 }
               }
 
-              console.log('ALL', this.searchResult);
-              console.log('T', this.search_typologies_result);
-              console.log('R', this.search_rest_name_result);
-              console.log('P', this.search_plate_name_result);
+              // console.log('ALL', this.searchResult);
+              // console.log('T', this.search_typologies_result);
+              // console.log('R', this.search_rest_name_result);
+              // console.log('P', this.search_plate_name_result);
             })
             .catch(function (error) {
               console.log(error);
@@ -176,6 +177,45 @@ function  init() {
         },
 
         changeRestResult: function(){
+          this.restaurants = this.search_typologies_result;
+          this.displayPlates = 0;
+          this.displayRestaurants = 1;
+          this.$forceUpdate();
+          this.closeSearchBar();
+        },
+
+        startResearchSlider: function(query){
+          console.log(query);
+          this.oldSearchInput = query;
+          this.no_result = 0;
+          this.research_error = 0;
+          this.research_category = 0;
+          axios.get('/search/' + query, {
+            params: {
+            }
+            })
+            .then((response) => {
+              this.searchResult = response.data;
+              this.$forceUpdate();
+              if (response.data.error) {
+                this.research_error = 1;
+              } else if (
+                response.data.typology_resoult.length === 0
+              ) {
+                this.no_result = 1;
+              } else {
+                if (this.searchResult.typology_resoult.length != 0) {
+                  this.research_category = 1;
+                  this.changeRestResultSlider();
+                }
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+        },
+
+        changeRestResultSlider: function() {
           this.restaurants = this.search_typologies_result;
           this.displayPlates = 0;
           this.displayRestaurants = 1;
@@ -195,7 +235,7 @@ function  init() {
             }
             })
             .then((response) => {
-              console.log('allbyname', response.data);
+              // console.log('allbyname', response.data);
               this.restaurants = response.data;
               this.displayPlates = 0;
               this.displayRestaurants = 1;
@@ -217,7 +257,7 @@ function  init() {
             }
             })
             .then((response) => {
-              console.log("all plates ->", response.data);
+              // console.log("all plates ->", response.data);
               this.plates = response.data;
               this.$forceUpdate();
             })
@@ -228,6 +268,8 @@ function  init() {
 
         pushInCart: function(plate) {
           this.cart.push(plate);
+          // console.log(plate);
+          this.delivery_cost = plate.delivery_cost;
         },
 
         reset_cart: function() {
@@ -266,7 +308,122 @@ function  init() {
           }
         },
 
+        remove_plate: function(plate){
+
+          let plate_index = -1;
+          this.cart.forEach((item, i) => {
+            if (item.plate_id == plate.plate_id) {
+              plate_index = i;
+            }
+          });
+          if (plate_index > -1) {
+            this.$delete(this.cart, plate_index);
+          }
+          // console.log(this.cart_new);
+          this.$forceUpdate();
+        },
+
+        add_plate: function(plate){
+          // console.log(plate);
+          let newPlate = {
+            "plate_id": plate.plate_id,
+            "original_price": plate.original_price,
+            "plate_price": plate.original_price,
+            "plate_name": plate.plate_name,
+            "delivery_cost": plate.delivery_cost,
+          };
+          // console.log(newPlate);
+          this.cart.push(newPlate);
+          this.$forceUpdate();
+        },
+
       },
+  });
+
+  $(".alph_order .fas.fa-caret-up").click(function() {
+    // console.log("ordina alfabeticamente Z-A");
+    $(".alph_order .fas.fa-caret-up").addClass("my-active");
+    $(".alph_order .fas.fa-caret-up").toggleClass("my-inactive");
+
+    $(".alph_order .fa-caret-down").addClass("my-active");
+    $(".alph_order .fa-caret-down").toggleClass("my-inactive");
+
+    $(".typ_order .fas.fa-caret-up").removeClass("my-active");
+    $(".typ_order .fas.fa-caret-down").removeClass("my-active");
+
+    $('.card-plate').sort(function (b, a) {
+      let contentA = $(a).find(".plate_name").text();
+      let contentB = $(b).find(".plate_name").text();
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   }).appendTo(".dashboard_plate");
+
+  });
+
+  $(".alph_order .fas.fa-caret-down").click(function() {
+    // console.log("ordina alfabeticamente A-Z");
+    $(".alph_order .fas.fa-caret-up").addClass("my-active");
+    $(".alph_order .fas.fa-caret-up").toggleClass("my-inactive");
+
+    $(".alph_order .fa-caret-down").addClass("my-active");
+    $(".alph_order .fa-caret-down").toggleClass("my-inactive");
+
+    $(".typ_order .fas.fa-caret-up").removeClass("my-active");
+    $(".typ_order .fas.fa-caret-down").removeClass("my-active");
+
+    $('.card-plate').sort(function (a, b) {
+      let contentA = $(a).find(".plate_name").text();
+      let contentB = $(b).find(".plate_name").text();
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   }).appendTo(".dashboard_plate");
+  });
+
+  $(".typ_order .fas.fa-caret-up").click(function() {
+    // console.log("ordina categorie Z-A");
+    $(".typ_order .fas.fa-caret-up").addClass("my-active");
+    $(".typ_order .fas.fa-caret-up").toggleClass("my-inactive");
+
+    $(".typ_order .fa-caret-down").addClass("my-active");
+    $(".typ_order .fa-caret-down").toggleClass("my-inactive");
+
+    $(".alph_order .fas.fa-caret-up").removeClass("my-active");
+    $(".alph_order .fas.fa-caret-down").removeClass("my-active");
+
+    $('.card-plate').sort(function (b, a) {
+      let contentA = $(a).find(".category_name").text();
+      let contentB = $(b).find(".category_name").text();
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   }).appendTo(".dashboard_plate");
+
+  });
+
+  $(".typ_order .fas.fa-caret-down").click(function() {
+    // console.log("ordina categorie A-Z");
+    $(".typ_order .fas.fa-caret-up").addClass("my-active");
+    $(".typ_order .fas.fa-caret-up").toggleClass("my-inactive");
+
+    $(".typ_order .fa-caret-down").addClass("my-active");
+    $(".typ_order .fa-caret-down").toggleClass("my-inactive");
+
+    $(".alph_order .fas.fa-caret-up").removeClass("my-active");
+    $(".alph_order .fas.fa-caret-down").removeClass("my-active");
+
+    $('.card-plate').sort(function (a, b) {
+      let contentA = $(a).find(".category_name").text();
+      let contentB = $(b).find(".category_name").text();
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   }).appendTo(".dashboard_plate");
+
+  });
+
+  //DASH ham
+  $(".header-dashboard-responsive svg").click(function() {
+     $(".container-dashboard .left-side-dash").addClass("myactive");
+     $(".container-dashboard .right-side-dash").addClass("disabled");
+  });
+
+  $(".left-side-dash .close-dash-menu").click(function() {
+     $(".container-dashboard .left-side-dash").removeClass("myactive");
+     $(".container-dashboard .right-side-dash").removeClass("disabled");
   });
 }
 

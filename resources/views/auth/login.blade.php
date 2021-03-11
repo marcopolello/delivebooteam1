@@ -64,7 +64,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        <div>
+                                        <div class="forgot-password">
                                             {{ __('Forgot Your Password?') }}
                                         </div>
                                     </a>
@@ -77,7 +77,7 @@
 
             <div class="image">
                 <div class="background"></div>
-                <img src="/img/chart_illustration.svg" alt="">
+                <img src="/storage/pizza_chart.svg" alt="">
             </div>
 
 </div>
