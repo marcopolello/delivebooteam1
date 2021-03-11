@@ -29,6 +29,10 @@
     width: 100%;
 }
 
+.dashboard-index {
+  padding: 0 30px;
+}
+
 .left-side-dash {
     display: flex;
     flex-direction: column;
@@ -225,7 +229,6 @@
     height: auto;
     overflow: auto;
     background-color: white;
-    padding: 0 2rem;
 
     @media all and (max-width: 867px) {
         width: 100%;

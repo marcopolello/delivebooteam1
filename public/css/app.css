@@ -16751,7 +16751,7 @@ a.text-dark:focus {
   display: flex;
   flex-direction: column;
   padding: 25px 50px;
-  background-color: #D0EB99;
+  background-color: #E0F3F9;
 }
 
 @media all and (min-width: 725px) and (max-width: 967px) {
@@ -16918,7 +16918,7 @@ a.text-dark:focus {
   border: none;
   border-radius: 5px;
   outline: none;
-  border: 1px solid #A3AFAF;
+  border: 1px solid #00C2B3;
   box-shadow: inset 1px 5px 8px rgba(0, 0, 0, 0.07);
 }
 
@@ -16964,7 +16964,7 @@ a.text-dark:focus {
   height: 38px;
   border-radius: 6px;
   outline: none;
-  border: 1px solid #A3AFAF;
+  border: 1px solid #00C2B3;
   box-shadow: inset 1px 5px 8px rgba(0, 0, 0, 0.07);
 }
 
@@ -17010,7 +17010,7 @@ a.text-dark:focus {
   width: 30%;
   border-radius: 6px;
   outline: none;
-  border: 1px solid #A3AFAF;
+  border: 1px solid #00C2B3;
   box-shadow: inset 1px 5px 8px rgba(0, 0, 0, 0.07);
 }
 
@@ -17099,7 +17099,7 @@ a.text-dark:focus {
   height: 20px;
   border-style: none;
   outline: none;
-  border: 1px solid #A3AFAF;
+  border: 1px solid #00C2B3;
 }
 
 @media all and (min-width: 441px) and (max-width: 575px) {
@@ -17159,7 +17159,7 @@ a.text-dark:focus {
   border-radius: 6px;
   border: none;
   outline: none;
-  border: 1px solid #A3AFAF;
+  border: 1px solid #00C2B3;
   box-shadow: inset 1px 5px 8px rgba(0, 0, 0, 0.07);
 }
 
@@ -17492,6 +17492,10 @@ a.text-dark:focus {
   width: 100%;
 }
 
+.dashboard-index {
+  padding: 0 30px;
+}
+
 .left-side-dash {
   display: flex;
   flex-direction: column;
@@ -17690,7 +17694,6 @@ a.text-dark:focus {
   height: auto;
   overflow: auto;
   background-color: white;
-  padding: 0 2rem;
 }
 
 @media all and (max-width: 867px) {
