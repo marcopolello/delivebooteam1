@@ -1,0 +1,66 @@
+@mixin flex-centratura {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin debug-border {
+  border: 1px solid black;
+}
+
+.restaurant_container {
+  min-height: 13px;
+  width: 280px;
+  font-size: 16px;
+  padding: 10px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  & * {
+    margin: 0;
+    padding: 0;
+  }
+
+  section {
+    // @include debug-border;
+  }
+
+  .img{
+    width: 260px;
+    height: 150px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+  }
+  .description {
+    width: 260px;
+    height: 130px;
+    padding: 5px;
+
+    .title {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .rate {
+      font-size: 0.9em;
+      font-style: italic;
+      color: $color_deliveroo;
+      .rate_number {
+        color: $soft-text;
+        padding: 3px;
+      }
+    }
+    .typology {
+      font-size: 0.9em;
+      color: $soft-text;
+    }
+    .delivery_cost {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: $soft-text;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+// INIZIO HEADER
+// HEADER
+header{
+
+  // debug
+    background-color: white;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    height: 80px;
+  // end
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto; 
+
+    img{
+      width: 150px;
+    }
+  }
+}
+
+
+  // INIZIO HEADER DX RESPONSIVE
+  // @media screen and (max-width: 980px) {
+
+  //   header{
+      
+  //     #search-bar{
+  //       visibility: hidden;
+  //     }
+  //   }
+  // }
+
+  // @media screen and (min-width: 981px) {
+
+  //   header {
+
+  //     #search-bar{
+  //       visibility: visible;
+  //     }
+
+  //   }
+  // }
+  // FINE HEADER DX RESPONSIVE
+
+

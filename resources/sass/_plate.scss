@@ -7,27 +7,27 @@
   border: 1px solid black;
 }
 $colore_secondario: #00C2B3;
-
 .plate_container {
+  margin: 10px 0;
+  margin-right: 10px;
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
   background-color: white;
   border-radius: 5px;
-  width: 50%;
+  width: 280px;
   height: 130px;
   padding: 10px;
-  font-size: 18px;
+  font-size: 16px;
   position: relative;
-
-  border: 1px solid black;
-
+  border: 1px solid rgba(0, 0, 0, 0.08);
   &:hover {
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
-
   .plate_text {
     // @include debug-border;
     width: calc(100% - 108px);
-
     .title {
       font-size: 1em;
       max-height: 25%;
@@ -35,7 +35,6 @@ $colore_secondario: #00C2B3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-
     }
     .descrizione {
       font-size: 0.8em;
@@ -44,6 +43,7 @@ $colore_secondario: #00C2B3;
       // white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      position: relative;
     }
     .ingredienti {
       font-size: 0.7em;
@@ -52,40 +52,52 @@ $colore_secondario: #00C2B3;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .prezzo_intero, .prezzo_scontato {
-      font-size: 1.2em;
-      height: 25%;
+    .prices {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+    }
+    .prezzo_intero {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .prezzo_scontato {
+      font-size: 1em;
+      font-weight: bold;
     }
   }
-
   .plate_img {
     // @include debug-border;
-
     height: 108px;
     width:  108px;
     flex-shrink: 0;
     position: relative;
     background-position: center;
     background-size: cover;
-
     .sconto {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      width: 44px;
+      height: 44px;
       position: absolute;
       bottom: 5px;
       right: 5px;
-      background-color: red;
+      background-color: #FB5058;
+      border: 1px solid yellow;
+      border-radius: 50%;
       color: white;
       font-weight: bold;
+      transform: rotate(325deg);
       padding: 3px;
-      border-radius: 3px;
     }
   }
-
   .plate_text .prezzo_barrato {
     text-decoration: line-through;
     color: red;
-    font-size: 1em;
+    font-size: 0.9em;
   }
-
   .plate_esaurito {
     position: absolute;
     top: 0;
@@ -93,19 +105,34 @@ $colore_secondario: #00C2B3;
     width: 100%;
     height: 100%;
     @include flex-centratura;
-    background-color: rgba(140, 140, 140, 0.6);
+    background-color: $sold_out_background;
+    img {
+      width: 140px;
+      height: auto;
+    }
+  }
+
+  .layover {
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(1px);
   }
 
   // DETAILS
-
   .plate_detail {
     position: fixed;
-    width: 600px;
+    z-index: 1000;
+    width: 450px;
     height: 80vh;
+    max-height: 450px;
     top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
-    border: 1px solid black;
+    border: 1px solid rgb(194, 194, 194);
     border-radius: 5px;
     background-color: white;
 
@@ -115,7 +142,6 @@ $colore_secondario: #00C2B3;
       height: 50px;
       position: relative;
       @include flex-centratura;
-
       .close_details {
         width: 35px;
         height: 50px;
@@ -125,38 +151,45 @@ $colore_secondario: #00C2B3;
         position: absolute;
         right: 0;
         top: 0;
-
         &:hover {
           cursor: pointer;
         }
       }
     }
-
     .show {
       height: calc(100% - 150px);
       padding: 8px;
       overflow: auto;
+      display: flex;
+      flex-direction: column;
+      &:after {
+        content: "";
+        display: block;
+        height: 8px;
+        width: 100%;
+        flex-shrink: 0;
+      }
 
       .plate_img {
         margin: auto;
-        width: 350px;
-        height: 350px;
+        width: 200px;
+        height: 200px;
         margin: 10px auto;
         border-radius: 50%;
       }
-
+      .plate_detail_info {
+        flex-grow: 1;
+      }
       .quantity_pannel {
         width: 200px;
         height: 30px;
-        margin: 10px auto;
+        margin: 10px auto 0 auto;
         display: flex;
-        @include debug-border;
-
+        // @include debug-border;
         .remove_plate {
           width: 40px;
           height: 100%;
           @include flex-centratura;
-
           &:hover {
             cursor: pointer;
           }
@@ -164,20 +197,24 @@ $colore_secondario: #00C2B3;
         .quantity {
           width: 120px;
           height: 100%;
+          font-weight: bold;
+          font-size: 1.2em;
           @include flex-centratura;
         }
         .add_plate {
           width: 40px;
           height: 100%;
           @include flex-centratura;
-
           &:hover {
             cursor: pointer;
           }
         }
+        .change_quantity {
+          color: $color_deliveroo;
+          font-size: 21px;
+        }
       }
     }
-
     .total {
       height: 100px;
       border-top: 1px solid lightgrey;
@@ -185,31 +222,46 @@ $colore_secondario: #00C2B3;
       justify-content: space-between;
       align-items: center;
       padding: 20px;
-
       .button {
         @include flex-centratura;
         height: 60px;
         padding: 15px;
         border-radius: 3px;
-
         &:hover {
           cursor: pointer;
         }
       }
-
       .button-light {
-        width: 150px;
+        width: 110px;
         border: 1px solid lightgrey;
         color: $colore_secondario;
-
       }
       .button-strong {
-        width: 300px;
+        width: 220px;
         background-color: $colore_secondario;
         color: white;
       }
     }
+  }
+}
+@media all and (max-width: 700px) {
 
+  #rest_show_main {
+
+    .plate_detail {
+      top: 0;
+      left: 0;
+      transform: translate(0, 0);
+      width: 100%;
+      height: 100vh;
+      border: 0;
+      max-height: 100vh;
+
+      .plate_img {
+        width: 150px;
+        height: 150px;
+      }
+    }
   }
 
 }

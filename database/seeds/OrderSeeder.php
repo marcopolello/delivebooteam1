@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Order;
 use App\Plate;
+use App\User;
 
 class OrderSeeder extends Seeder
 {
@@ -13,11 +14,13 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-      factory(Order::class, 50) -> create()
+      factory(Order::class, 500) -> create()
       -> each(function($order){
 
-          $plates = Plate::inRandomOrder()
-          ->limit(rand(1,6)) -> get();
+          // per ogni ordine prende un user casuale.
+          $user = User::inRandomOrder()->first();
+          // assegna piatti solo di quello user
+          $plates = $user->plates()->inRandomOrder()->limit(rand(1,6)) -> get();
 
           $order -> plates() -> attach($plates);
       });

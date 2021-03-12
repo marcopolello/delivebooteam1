@@ -8,6 +8,9 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// aggiunte 3/03/21
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class RegisterController extends Controller
 {
@@ -27,8 +30,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'address' => ['required', 'string', 'max:255'],
-            'piva' => ['required', 'string', 'min:11', 'max:11'],
+            'address' => ['required', 'string', 'max:255', 'unique:users,address'],
+            'piva' => ['required', 'string', 'min:11', 'max:11', 'unique:users,piva'],
             'phone' => ['required', 'string', 'min:6', 'max:30'],
             'delivery_cost_euro' => ['required', 'integer', 'min:0', 'max:9999'],
             'delivery_cost_cent' => ['required', 'integer', 'min:0', 'max:99'],
@@ -45,7 +48,7 @@ class RegisterController extends Controller
     {
         $deliveryCost = $data['delivery_cost_euro'] . $data['delivery_cost_cent'];
         // dd($data);
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -54,5 +57,10 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'delivery_cost' => $deliveryCost,
         ]);
+        Mail::to($data['email'])->send(new SendMail($user));
+
+        return $user;
+
     }
+
 }

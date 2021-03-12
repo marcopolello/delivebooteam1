@@ -14,6 +14,7 @@ class CategorySeeder extends Seeder
     {
 
       $defaultCategories = [
+        'nessuna',
         'fritti',
         'antipasti',
         'primi piatti',
@@ -24,7 +25,6 @@ class CategorySeeder extends Seeder
         'bevande',
         'bibite',
         'alcolici',
-        'cancellato',
       ];
 
       foreach ($defaultCategories as $category) {

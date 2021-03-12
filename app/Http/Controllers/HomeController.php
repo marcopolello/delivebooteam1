@@ -27,7 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-      return view('home');
+      // return view('home');
+      return redirect() -> route('dashboard');
     }
 
     //Restaurant Edit
@@ -38,6 +39,10 @@ class HomeController extends Controller
 
     public function uploadInfo(Request $request){
 
+      if ($request['delivery_cost_cent'] == '00') {
+        $request['delivery_cost_cent'] = 0;
+      }
+
       $request -> validate([
         'photo' => ['image','max:20240'],
         'description' => ['nullable','string', 'max:255'],
@@ -46,7 +51,8 @@ class HomeController extends Controller
         'delivery_cost_cent' => ['required', 'integer', 'min:0', 'max:99'],
       ]);
 
-      $deliveryCost = $request['delivery_cost_euro'] . $request['delivery_cost_cent'];
+      // $plate_price = ($data['price_euro'] * 100) + $data['price_cents'];
+      $deliveryCost = ($request['delivery_cost_euro'] * 100) + $request['delivery_cost_cent'];
 
       if ($request -> photo) {
         $this->updateUserIcon($request -> file('photo'));
@@ -102,6 +108,5 @@ class HomeController extends Controller
         }
       } catch (\Exception $e) {}
     }
-
     //End Restaurant Edit
 }

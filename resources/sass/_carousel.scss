@@ -1,0 +1,116 @@
+//carousel
+$vue-navy: #2c3e50;
+$vue-navy-light: #3a5169;
+$vue-teal: #42b883;
+$vue-teal-light: #42b983;
+$gray: #666a73;
+$light-gray: #f8f8f8;
+
+.card-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 40px;
+    color: $gray;
+}
+
+.card-carousel {
+    display: flex;
+    justify-content: center;
+    width: calc( 100% - 60px);
+
+    &--overflow-container {
+        overflow: hidden;
+    }
+
+    &--nav__left,
+    &--nav__right {
+        // display: inline-block;
+        width: 30px;
+        height: 30px;
+        padding: 10px;
+        border-top: 10px solid $vue-teal;
+        border-right: 10px solid $vue-teal;
+        cursor: pointer;
+        transition: transform 150ms linear;
+        &[disabled] {
+        opacity: 0.2;
+        border-color: black;
+        }
+    }
+
+    &--nav__left { //freccia sinistra
+        transform: rotate(-135deg);
+        &:active {
+        transform: rotate(-135deg);
+    }
+}
+
+    &--nav__right { //freccia destra
+        transform: rotate(45deg);
+        &:active {
+        transform: rotate(45deg);
+        }
+    }
+}
+
+.card-carousel-cards {
+    display: flex;
+    transition: transform 1000ms ease-out; // velocita' slider
+    transform: translatex(0px);
+
+    .card-carousel--card {
+        margin: 0 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-radius: 4px;
+        z-index: 3;
+
+        &:first-child {
+        margin-left: 0;
+        }
+
+        &:last-child {
+        margin-right: 0;
+        }
+
+        img {
+        vertical-align: bottom;
+        border-radius: 4px;
+
+        transition: opacity 300ms linear;
+        user-select: none;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    &--footer {
+
+        p {
+            padding: 3px 0;
+            margin: 0;
+            margin-bottom: 2px;
+            font-size: 19px;
+            font-weight: 500;
+            color: $vue-navy;
+            user-select: none;
+
+            }
+        }
+    }
+}
+
+// @media screen and (max-width: 981px) {
+
+    
+//     .card-carousel{
+
+//         &--nav__left,
+//         &--nav__right {
+//             visibility: hidden;
+//         }
+//     }
+    
+//   }

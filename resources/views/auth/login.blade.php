@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-login">
+
+   
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                {{-- <h2 class="card-header">{{ __('Login') }}</h2> --}}
+
+                <div class="title">
+                    <h1>Ti diamo il benvenuto!</h1>
+                    <p>Sfrutta i dati a disposizione per far crescere il tuo business. Monitora le vendite, controlla i tuoi progressi e attira nuovi clienti con offerte speciali.</p>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -52,14 +57,16 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-4 flex">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        <div class="forgot-password">
+                                            {{ __('Forgot Your Password?') }}
+                                        </div>
                                     </a>
                                 @endif
                             </div>
@@ -67,7 +74,11 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="image">
+                <div class="background"></div>
+                <img src="/storage/pizza_chart.svg" alt="">
+            </div>
+
 </div>
 @endsection

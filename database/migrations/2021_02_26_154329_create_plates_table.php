@@ -26,6 +26,7 @@ class CreatePlatesTable extends Migration
             $table->string('img') -> nullable();
             $table->unsignedBigInteger('category_id') -> nullable();
             $table->unsignedBigInteger('user_id');
+            $table->boolean('destroyed') -> default(0);
 
             $table->timestamps();
         });

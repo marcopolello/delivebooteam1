@@ -1,0 +1,44 @@
+.container-register{
+
+    width: 100%;
+    justify-content: start;
+    background-image: url("/storage/polygon.svg");
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+
+    .card {
+        margin-bottom: 20px;
+        // border: 1px solid black;
+
+        button {
+            width: 100px;
+        }
+    }
+}
+
+// media md, s
+@media screen and (max-width: 800px) {
+    .container-register {
+        
+        .card {
+            margin: 5% 10%;
+            // border: 1px solid black;
+        }
+    }
+}
+
+// media lg
+@media screen and (min-width: 801px) {
+
+    .container-register {
+
+        .card {
+            margin-top: 5%;
+            margin-left: 10%;
+           
+            // border: 1px solid black;
+        }
+    }
+}
+

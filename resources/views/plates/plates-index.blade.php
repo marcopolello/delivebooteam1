@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <title>Plates</title>
     <link rel="stylesheet" href="{{asset('/css/app.css')}}">
+    <script src="{{ asset('/js/app.js') }}"></script>
   </head>
   <body>
-    @include('plates.plates')
+    <div id="app">
+      @include('plates.plates')
+    </div>
   </body>
 </html>
