@@ -15,7 +15,7 @@
                           ? 'active' : ''">Dashboard</a></li>
                   <li><a :href="this.logout">Logout</a></li>
                 </div>
-                
+
                 <div v-else>
 
                   <li><a :href="this.register"
@@ -27,11 +27,11 @@
                           ? 'active' : ''">Login</a></li>
 
                 </div>
-              
+
             </ul>
         </nav>
-        <span class="bm-cross-button cross-style" 
-            @click="closeMenu" 
+        <span class="bm-cross-button cross-style"
+            @click="closeMenu"
             >
 
             <!-- cross -->
@@ -42,10 +42,10 @@
         </span>
       </div>
 
-      <div class="bm-burger-button" 
-        @click="openMenu" 
+      <div class="bm-burger-button"
+        @click="openMenu"
         >
-        
+
         <!-- burger -->
         <svg height="30" width="30" viewBox="0 0 24 24" class="burger">
           <path d="M2 13V11H22V13H2ZM2 19V17H22V19H2ZM2 7V5H22V7H2Z"></path>
@@ -59,7 +59,7 @@
       name: 'menubar',
       data() {
         return {
-          
+
           // login: this.login,
           // register: this.register,
           // dashboard: this.dashboard,
@@ -108,7 +108,7 @@
           this.isSideBarOpen = false;
           document.body.classList.remove('bm-overlay'); //remove class
           this.$refs.sideNav.style.width = '0px';
-        }, 
+        },
       },
     };
 </script>
@@ -144,7 +144,7 @@ position: absolute;
       cursor: pointer;
       width: 150px;
     }
-    
+
     .cross-style {
       position: absolute;
       top: 12px;
@@ -158,13 +158,13 @@ position: absolute;
       z-index: 1000; /* Stay on top */
       top: 0;
       left: 0;
-      background-color: white; 
+      background-color: #E0F3F9;
       overflow-x: hidden; /* Disable horizontal scroll */
       padding-top: 60px;
       transition: 0.4s; /*second transition effect to slide in the sidenav*/
     }
     .bm-overlay {
-      background: rgba(0, 0, 0, 0.3);
+      background: white;
     }
 
     /* nav list */
@@ -172,7 +172,7 @@ position: absolute;
       font-size: 20px;
     }
     .bm-item-list li {
-      font-weight: 700;  
+      font-weight: 700;
     }
     .bm-item-list ul{
         list-style: none;
@@ -183,8 +183,12 @@ position: absolute;
         text-decoration: none;
         padding: 20px 10px;
     }
+    /* .i-am-in-home {
+      background-color: #00ccbc;
+    } */
     .bm-item-list .active{
       background: #00ccbc;
+      border: 0 !important;
     }
     .bm-item-list li a.active{
       color: white;

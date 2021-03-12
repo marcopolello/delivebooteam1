@@ -20,7 +20,11 @@ class PlateController extends Controller
 
   public function platesIndex(){
     $user = Auth::user();
-    return view('plates.plates-index', compact('user'));
+    $email_user = $user -> email;
+    $word = '@';
+    $mail_cut = substr($email_user, 0, strpos($email_user, $word));
+
+    return view('plates.plates', compact('user', 'mail_cut'));
   }
 
   public function platesCreate() {
@@ -103,10 +107,15 @@ class PlateController extends Controller
   }
 
   public function platesEdit($id) {
+    $user = Auth::user();
+    $email_user = $user -> email;
+    $word = '@';
+    $mail_cut = substr($email_user, 0, strpos($email_user, $word));
+
     $plate = Plate::findOrFail($id);
     $categories = Category::all();
 
-    return view('plates.plate-edit', compact('plate', 'categories'));
+    return view('plates.plate-edit', compact('plate', 'categories', 'mail_cut'));
   }
 
   public function platesUpdate(Request $request, $id) {

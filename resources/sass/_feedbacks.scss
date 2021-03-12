@@ -1,77 +1,73 @@
-.card-2 {
-    // flex-basis: calc((100% / 3) - 40px);
-    height: auto;
-    border-radius: $border-card;
-    box-shadow: $shadow_button;
-    margin: 50px 0px;
-    padding: 15px;
+.new-feed {
 
-    @media all and (min-width: 1200px) and (max-width: 1600px) {
-        // flex-basis: calc((100% / 3) - 20px);
-        height: auto;
-    }
+    background-color: $dashboard-secondary;
+    min-height: 100vh;
+    padding: 30px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
-    @media all and (min-width: 868px) and (max-width: 1199px) {
-        height: auto;
-        flex-basis: 100%;
-        margin: 50px 0px 0px 0px;
-    }
-
-
-    & > h3 {
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: $color_deliveroo;
-
-        @media all and (min-width: 1200px) and (max-width: 1600px) {
-            font-size: 24px;
-        }
-
-
-        @media all and (min-width: 868px) and (max-width: 1199px) {
-            font-size: 20px;
-        }
-
-        @media all and (min-width: 576px) and (max-width: 867px) {
-            font-size: 18px;
-        }
-
-        @media all and (max-width: 575px) {
-            font-size: 16px;
-        }
-
-    }
-
-    .mini-card {
-        width: 90%;
-        margin: 10px auto;
-        padding: 20px;
-        height: auto;
-        background-color: $color_deliveroo;
-        color: $variable2;
-        border-radius: $border-card;
-        box-shadow: $shadow_button;
+        .feed-bubble {
+        // layout
         position: relative;
+        width: 280px;
+        margin: 25px 8px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
 
-        h1 {
-            position: absolute;
-            top: 10%;
-            right: 5%;
-        }
+        // looks
+        background-color: #fff;
+        padding: 20px 15px;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px;
 
-        @media all and (min-width: 1200px) and (max-width: 1600px) {
-
-        }
-
-        hr {
-            margin: 0 0 5px 0;
-            border-color: $variable2;
+        & * {
+            margin-bottom: 0px;
         }
 
         p {
-            margin: 0;
+            margin: 8px 0;
+            font-family: 'Redressed', cursive;
+            font-size: 1.4rem;
+            font-weight: 0;
+            line-height: 1em;
+            flex-grow: 1;
         }
     }
 
+    .feed-bubble::before {
+        // layout
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: 100%;
+        left: 1.5em; // offset should move with padding of parent
+        border: .75rem solid transparent;
+        border-top: none;
+
+        // looks
+        border-bottom-color: #fff;
+        filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+    }
+
+    .feed-bubble:hover {
+        animation:  shake 0.7s;
+    }
+
+    @keyframes shake {
+        10%, 90% {
+          transform: rotate(2deg);
+        }
+        20%, 80% {
+          transform: rotate(-2deg);
+        }
+        30%, 50%, 70% {
+          transform: rotate(2deg);
+        }
+        40%, 60% {
+          transform: rotate(-2deg);
+        }
+      }
 }

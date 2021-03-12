@@ -17,10 +17,8 @@ class OrderSeeder extends Seeder
       factory(Order::class, 500) -> create()
       -> each(function($order){
 
-          // per ogni ordine prende un user casuale.
           $user = User::inRandomOrder()->first();
-          // assegna piatti solo di quello user
-          $plates = $user->plates()->inRandomOrder()->limit(rand(1,6)) -> get();
+          $plates = $user->plates()->inRandomOrder()->limit(rand(1,15)) -> get();
 
           $order -> plates() -> attach($plates);
       });

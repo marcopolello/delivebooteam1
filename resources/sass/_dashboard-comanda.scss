@@ -1,0 +1,62 @@
+ul {
+  text-decoration: none;
+  list-style: none;
+}
+
+.section-comanda {
+  background-color: $dashboard-secondary;
+  min-height: 100vh;
+  padding: 50px 30px;
+
+  h1 {
+    text-align: center;
+  }
+
+  .comanda-plates {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    li {
+
+      .comanda-plate {
+        margin: 15px 8px;
+        width: 300px;
+        background-color: #fff;
+        padding: 20px 15px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px;
+        transition: 0.2s ease-in-out;
+
+        .plate-img-comanda {
+          width: 250px;
+          height: 250px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          border-radius: 8px;
+          margin: 0 auto;
+        }
+
+        .plate-title {
+          text-align: center;
+          font-weight: bold;
+        }
+
+        .ingredients {
+          width: 250px;
+          margin: 0 auto;
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+.comanda-plate:hover {
+  transform: scale(1.01);
+}
+
+

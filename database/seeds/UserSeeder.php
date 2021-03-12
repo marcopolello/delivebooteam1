@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
     public function run()
     {
       factory(User::class, 50)->create()->each(function ($user) {
-        $typologies = Typology::inRandomOrder()->limit(rand(1,5)) -> get();
+        $typologies = Typology::inRandomOrder()->limit(rand(1,4)) -> get();
         $user -> typologies() -> attach($typologies);
       });
     }

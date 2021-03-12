@@ -10,6 +10,6 @@ $factory->define(Feedback::class, function (Faker $faker) {
       'email' => $faker->email,
       'rate' => rand(1,5),
       'name' => $faker->name,
-      'comment' => $faker->word,
+      'comment' => $faker->sentence($nbWords = rand(0, 30), $variableNbWords = true),
     ];
 });

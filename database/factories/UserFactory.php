@@ -135,7 +135,7 @@ $factory->define(User::class, function (Faker $faker) {
         'address' => $faker ->unique()->streetAddress,
         'piva' => substr($faker ->unique() ->iban('IT'), 0, 11),
         'phone' => $faker->e164PhoneNumber,
-        'description' => $faker->word,
+        'description' => $faker->sentence($nbWords = rand(0, 20), $variableNbWords = true),
         'delivery_cost' => rand(100,2000),
     ];
 });

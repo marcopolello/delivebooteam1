@@ -17,14 +17,16 @@ class CategorySeeder extends Seeder
         'nessuna',
         'fritti',
         'antipasti',
+        'pizza',
         'primi piatti',
         'secondi piatti',
         'contorni',
         'dolci',
-        'dessert',
         'bevande',
-        'bibite',
-        'alcolici',
+        'vini',
+        'birre',
+        'amari',
+        'superalcolici',
       ];
 
       foreach ($defaultCategories as $category) {

@@ -128,39 +128,17 @@
                 {{-- CARD FEEDBACK --}}
                 <div id="resp-card" class="card">
                     <h3>I tuoi feedback</h3>
+                    <form class="" action="{{ route('feedbacks') }}">
+                        <button>
+                            Visualizza tutti i feedbacks
+                            <span class="order-color"></span><span class="order-color"></span><span class="order-color"></span><span class="order-color"></span>
+                        </button>
+                    </form>
                     <div class="graph-chart-js">
                         <div>
                             {!! $chartjsFeedbacks->render() !!}
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="container-card">
-                <div class="card-feed">
-                    @if (!empty($smallFeedbacks))
-                        @foreach ($smallFeedbacks as $fb)
-                            <div class="mini-card-feed">
-                                <div class="feedbacks-cards">
-                                    <div>
-                                        <h4>{{ $fb -> name }}</h4>
-                                        <br>
-                                        <p>{{ $fb -> email }}</p>
-                                        <br>
-                                        <label>Comment:
-                                            <h2>{{ $fb -> comment }}</h2>
-                                        </label>
-
-                                    </div>
-                                    <div>
-                                        <h2>Rate: {{ $fb -> rate }}</h2>
-                                    </div>
-                                </div>
-                            </div>        
-                        @endforeach                        
-                    @else
-                        <h2>Nessun feedback al momento!</h2>
-                    @endif
                 </div>
             </div>
 

@@ -19,6 +19,21 @@ class Plate extends Model
     'img',
   ];
 
+  public static function getDiscount() {
+    $num = rand(1, 3);
+    if($num > 2) {
+      $disc = rand(1, 50);
+    } else {
+      $disc = 0;
+    }
+    return $disc;
+  }
+
+  public static function getAvail() {
+    $num = rand(1, 10);
+    return $num > 2 ? 1 : 0;
+  }
+
   public function user(){
     return $this -> belongsTo(User::class);
   }

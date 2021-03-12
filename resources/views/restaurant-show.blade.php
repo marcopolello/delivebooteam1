@@ -98,7 +98,11 @@
           </div>
           <div class="more_info">
             <h4 class="more-info-title">Descrizione:</h4>
-            <p class="rest_desc">{{$restaurant -> description}}</p>
+            @if ($restaurant -> description)
+              <p class="rest_desc">{{$restaurant -> description}}</p>
+            @else
+              <p class="rest_desc">Nessuna discrizione</p>    
+            @endif
             <p class="rest_phone">Contattaci allo: {{$restaurant -> phone}}</p>
           </div>
 
