@@ -64,8 +64,6 @@ Route::get('/dashboard/restaurant/comanda/{id}', 'OrderController@restaurantComa
   // carrello + ordine effettuato
 Route::post('/keep-cart', 'PaymentController@getCart')
         -> name('get-cart');
-Route::get('/create/order', 'PaymentController@create')
-        -> name('order-create');
 Route::post('/new/order/store', 'PaymentController@storeOrder')
         -> name('order-store');
 Route::post('/checkout/{id}', 'PaymentController@checkout')

@@ -4,13 +4,21 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 100vh;
-  background-color: $color_deliveroo;
-  background: #09D6BA;
-  background: -webkit-linear-gradient(bottom left, #09D6BA, #D1EB99);
-  background: -moz-linear-gradient(bottom left, #09D6BA, #D1EB99);
-  background: linear-gradient(to top right, #09D6BA, #D1EB99);
-  background: linear-gradient(160deg, #008982,  #008982 20%, #09D6BA 60%, #09D6BA);
+  min-height: calc(100vh - 80px);
+  background-image: url("/storage/polygon.svg");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  // h4 {
+  //   padding-bottom: 1rem;
+  // }
+  // background-color: $color_deliveroo;
+  // background: #09D6BA;
+  // background: -webkit-linear-gradient(bottom left, #09D6BA, #D1EB99);
+  // background: -moz-linear-gradient(bottom left, #09D6BA, #D1EB99);
+  // background: linear-gradient(to top right, #09D6BA, #D1EB99);
+  // background: linear-gradient(160deg, #008982,  #008982 20%, #09D6BA 60%, #09D6BA);
   .cont-ord-left{
     margin-left: 10%;
   }
@@ -36,21 +44,43 @@
         flex-wrap: wrap;
       }
       .separate-survey{
+        margin: 10px 0;
+        flex-shrink: 0;
+        flex-grow: 0;
+        background-color: white;
+        border-radius: 5px;
+        width: 300px;
+        height: 130px;
+        padding: 10px;
+        font-size: 16px;
+        position: relative;
+        border: 1px solid #daede8;
         padding: 2%;
         text-align: center;
-        // border: 1px solid $color_deliveroo_2;
-        margin: 1em 0;
-        margin: 0 auto;
-        width: calc(100% / 2);
+      }
+      .separate-survey:hover{
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px;
       }
     }
-    .separate-survey:nth-child(7){
-      flex-basis: 5;
-      flex-grow: 10;
-      display: block;
-      flex: none;
-      align-self: flex-end;
+    .but-cont-max{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      .separate-survey-but{
+        margin: 10px 0;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        position: relative;
+        padding: 10px;
+        text-align: center;
+      }
     }
+
     .order-survey-box-right{
       // border: 2px solid $color_deliveroo_2;
       width: 30%;
@@ -64,6 +94,9 @@
         position: absolute;
         height: 100%;
         width: 100%;
+        .basket-hover:hover{
+          box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px;
+        }
         .basket_header{
           background-color: #daede8;
           border-top-left-radius: 4px;
@@ -75,7 +108,7 @@
         .basket-summary{
           overflow-y: scroll;
           padding: 2%;
-          max-height: 100%;
+          max-height: 50vh;
           display: flex;
           flex-direction: column;
           margin-right: 0;
@@ -94,7 +127,7 @@
       }
     }
   }
-  input{
+  .separate-survey input{
     border-radius: 2px;
     border: 1px solid #bac3c3;
     box-shadow: inset 0 2px 0 0 rgb(0 0 0 / 5%);
@@ -104,15 +137,27 @@
     font-size: 16px;
   }
   #submit-order-checkout{
+    border-radius: 5px;
+    border: 1px solid $color_deliveroo;
+    margin-bottom: 24px;
+    height: auto;
+    font-size: 16px;
+
     width: 200px;
     background-color: $color_deliveroo;
-    padding: 0 10%;
+    padding: 10px 25px;
     color: white;
   }
   #back-order-checkout{
+    border-radius: 5px;
+    border: 1px solid $discount-price;
+    margin-bottom: 24px;
+    height: auto;
+    font-size: 16px;
+
     width: 200px;
     background-color: $discount-price;
-    padding: 0 10%;
+    padding: 10px 25px;
     color: white;
   }
   .fas{margin: 20px 0;}
@@ -165,21 +210,24 @@
           display: flex;
           justify-content: space-around;
           flex-wrap: wrap;
+          padding: 3%;
         }
         .separate-survey{
           padding: 2%;
           text-align: center;
-          margin: 1em 0;
-          margin: 0 auto;
+          margin: 2%;
           width: 100%;
         }
       }
       .order-survey-box-right{
         margin-left: 0;
-        .basket-summary{
+        // .basket-summary{
 
-        }
+        // }
       }
+    }
+    .separate-survey input{
+      padding: 10px 60px;
     }
   }
 }
@@ -212,17 +260,20 @@
 
         .form-order-bg{
           padding-top: 20px;
-          width: 90%;
+          // width: 90%;
         }
         .separate-survey{
-          width: 100%;
+          width: 90%;
+          input {
+            width: 100%;
+          }
         }
       }
       .order-survey-box-right{
         margin-left: 0;
         .box-wrapper{
           position: relative;
-          width: 90%;
+          // width: 90%;
           height: auto;
         }
 

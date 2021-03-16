@@ -14,11 +14,11 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-      factory(Order::class, 500) -> create()
+      factory(Order::class, 800) -> create()
       -> each(function($order){
 
           $user = User::inRandomOrder()->first();
-          $plates = $user->plates()->inRandomOrder()->limit(rand(1,15)) -> get();
+          $plates = $user->plates()->inRandomOrder()->limit(rand(1,10)) -> get();
 
           $order -> plates() -> attach($plates);
       });

@@ -34,7 +34,7 @@ header {
   padding: 20px 25px;
   padding-bottom: 15px;
   min-height: 200px;
-  font-size: 15px;
+  font-size: 18px;
   display: flex;
 
   .rest_info_left {
@@ -64,13 +64,18 @@ header {
 
     .delivery-box {
       display: flex;
-      align-items: center;
       padding: 8px 0;
       margin-top: 5px;
+      align-items: center;
+      
+      .icons-restaurant {
+        width: 50px;
+        text-align: center;
+      }
 
       i {
         color: $color_deliveroo;
-        font-size: 35px;
+        font-size: 1.20rem;
         padding: 5px;
       }
       .rest_address {
@@ -161,6 +166,7 @@ header {
       width: 100%;
       padding: 8px 25px;
       border-radius: 5px;
+      margin-bottom: 8px;
       border: 0;
       color: white;
       font-size: 1.1em;
@@ -169,7 +175,7 @@ header {
         cursor: pointer;
       }
     }
-    .cassa.disabled {
+    .cassa.disabled-custom {
       background-color: $disabled-button;
       &:hover {
         cursor: default;
@@ -312,7 +318,7 @@ header {
   }
 
   header .container {
-    padding: 25px;
+    // padding: 25px;
     width: 100% !important;
 
     .cart_header {

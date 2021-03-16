@@ -6,24 +6,37 @@
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
+    font-size: 15px;
 
     .card {
+        background: none;
+        border: 0;
         margin-bottom: 20px;
         // border: 1px solid black;
 
         button {
             width: 100px;
         }
+
+        .title {
+          h1 {
+            font-size: 3.1em;
+          }
+          p {
+            font-size: 1.8em;
+          }
+        }
     }
+
+
 }
 
 // media md, s
 @media screen and (max-width: 800px) {
     .container-register {
-        
+
         .card {
-            margin: 5% 10%;
-            // border: 1px solid black;
+            margin: 20px 20px;
         }
     }
 }
@@ -34,11 +47,8 @@
     .container-register {
 
         .card {
-            margin-top: 5%;
+            margin-top: 30px;
             margin-left: 10%;
-           
-            // border: 1px solid black;
         }
     }
 }
-

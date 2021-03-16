@@ -33,7 +33,13 @@ cut del testo da vue (ok ma non va da responsive) -->
     </div>
 
       <!-- Dettagli al click -->
+      
       <div v-show="display_details" class="layover">
+        <transition
+            name="custom-classes-transition"
+            enter-active-class="animated fadeInLeft"
+            leave-active-class="animated fadeOutLeft"
+        >
         <div class="plate_detail">
 
           <section class="header">
@@ -46,7 +52,7 @@ cut del testo da vue (ok ma non va da responsive) -->
           <section class="show">
 
             <div v-if="immagine != null" class="plate_img" :style="{'background-image':'url(' + url_img +')'}"></div>
-            <div class="plate_img" style="background-image: url(/storage/placeholder.svg)"></div>
+            <div v-else class="plate_img" style="background-image: url(/storage/placeholder.svg)"></div>
 
             <div class="plate_detail_info">
               <p class="descrizione">{{descrizione}}</p>
@@ -81,6 +87,7 @@ cut del testo da vue (ok ma non va da responsive) -->
 
           </section>
         </div>
+        </transition>
       </div>
   </div>
 </template>

@@ -105,7 +105,7 @@
                                     @else
                                         <p>Ordine da pagare</p>
                                     @endif 
-                                    <span>{{$item_3 -> total_price / 100}} €</span>
+                                    <span>{{$item_3 -> total_price}} €</span>
                                 </div>
                                 <p>Cellulare: {{$item_3 -> phone}}</p>
                             </div>      

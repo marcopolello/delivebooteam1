@@ -5,7 +5,7 @@
   <div class="header-responsive-home">
     @include('components.search-bar')
   </div>
-  
+
     {{-- MAIN --}}
     <main>
 
@@ -26,12 +26,11 @@
                 </div>
 
               </div>
-                  
+
           </section>
 
           <section v-if="displayPlates">
-            <h1>Plates</h1>
-
+        
             <div class="home_plates">
 
               <div class="home_plate_container" v-for="plate in plates" :key="plate.id">

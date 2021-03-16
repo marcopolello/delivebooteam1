@@ -47,15 +47,15 @@
     
     
             button {
-                height: 40px;
-                border: 1px solid white; border-radius: 5px;
+                border: 1px solid white; 
+                border-radius: 8px;
                 color: white;
-                padding: 0 5px;
-                background-color: #00ccbc;
+                padding: 8px 8px;
+                background-color: $color_deliveroo;
                 cursor: pointer;
     
                 &:hover{
-                    background-color: #00c2b3;
+                    background-color: $color_text_1;
                 }
             }
             

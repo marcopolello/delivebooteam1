@@ -1,5 +1,3 @@
-// INIZIO HEADER
-// HEADER
 header{
 
   // debug
@@ -16,34 +14,17 @@ header{
     height: 100%;
     margin: 0 auto; 
 
+    .components-container {
+      display: flex;
+      align-items: center;
+      
+      & div:first-child {
+        margin-right: 20px;
+      }
+    }
+
     img{
-      width: 150px;
+      width: 130px;
     }
   }
 }
-
-
-  // INIZIO HEADER DX RESPONSIVE
-  // @media screen and (max-width: 980px) {
-
-  //   header{
-      
-  //     #search-bar{
-  //       visibility: hidden;
-  //     }
-  //   }
-  // }
-
-  // @media screen and (min-width: 981px) {
-
-  //   header {
-
-  //     #search-bar{
-  //       visibility: visible;
-  //     }
-
-  //   }
-  // }
-  // FINE HEADER DX RESPONSIVE
-
-

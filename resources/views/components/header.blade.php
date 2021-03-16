@@ -1,29 +1,13 @@
-{{-- HEADER --}}
 <header id="header-search">
   <div class="container">
 
-      {{-- menu --}}
-        <ham-menu
-            :welcome = "'{{ route("index") }}'"
-            :login = "'{{ route("login") }}'"
-            :register = "'{{ route("register") }}'"
-            :dashboard = "'{{ route("dashboard") }}'"
-            :logout = "'{{ route("logout") }}'"
-            :user = "'{{ Auth::user() }}'"
-            
-            {{-- status --}}
-            :welcome_s = "'{{Request::routeIs('index')}}'"
-            :login_s = "'{{Request::routeIs('login')}}'"
-            :register_s = "'{{Request::routeIs('register')}}'"
-            :dashboard_s = "'{{Request::routeIs('dashboard')}}'"
-            >
-        </ham-menu>
-  
+    <div class="components-container">
+      @include('components.ham')
       @include('components.search-bar')
+    </div>
 
-      {{-- logo --}}
-      <a href="{{route('index')}}" class="logo">
-        <img src="{{asset('storage/img/deliveroo-logo.svg')}}" alt="">
+    <a href="{{route('index')}}" class="logo">
+      <img src="{{asset('storage/img/deliveroo-logo.svg')}}" alt="">
     </a>
 
   </div>

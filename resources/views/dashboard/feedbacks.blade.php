@@ -29,6 +29,7 @@
                     @endfor
                 @endif
             </div>
+            {{$fb -> updated_at}}
 
     </div>
     @endforeach

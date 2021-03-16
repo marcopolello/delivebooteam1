@@ -1,0 +1,24 @@
+.torna-su {
+  position: fixed;
+  z-index: 2000;
+  right: 30px;
+  bottom: 30px;
+  background: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  &:hover {
+    transform: scale(1.1);
+  }
+  i {
+    font-size: 40px;
+    color: #e39db1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

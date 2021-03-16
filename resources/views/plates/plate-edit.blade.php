@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Plate</title>
-    <link rel="stylesheet" href="{{asset('/css/app.css')}}">
-</head>
-<body>
+@extends('layouts.layout-dashboard')
 
-    <header class="header-plate">
-        <h1>
-            Modifica piatto:
-            <span id="name-plate">{{ $plate -> plate_name }}</span>
-        </h1>
-        <a href="{{ route('index') }}">
-            <img src="{{ asset('storage/img/deliveroo-logo.svg') }}" alt="">
-        </a>
-    </header>
-
+@section('edit-plate')
     <section class="form-block">
+        <h1>Modifica il tuo piatto</h1>
+
         <img src="{{ asset('storage/img/restaurants-dash.png') }}" alt="">
         <form action="{{ route('plates-update', $plate -> id) }}" method="POST" enctype="multipart/form-data">
 
@@ -136,5 +120,4 @@
         </form>
 
     </section>
-</body>
-</html>
+@endsection

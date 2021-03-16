@@ -2,8 +2,6 @@
 
 @section('content')
 
-  {{-- bug: se ricarico la pagina crea un ordine uguale al precedente con id +1 --}}
-
   <div class="order-pay-container">
 
     <div class="cont-marg-left">
@@ -16,7 +14,7 @@
               <div class="separate-summary">
 
                 <h1>
-                  Ecco un Riepilogo dell'ordine:
+                  Riepilogo dell'ordine:
                 </h1>
 
               </div>
@@ -45,26 +43,8 @@
                   <span class="">{{$newOrder -> total_price/100}} €
                 </span>
               </div>
-
-
-
-
-
-
-
-
-
-
-              {{-- <h1><a href="{{ route('orders-index')}}">Indietro alla index-new</a></h1> --}}
-
-              {{-- <h1>
-              <a href="{{ route('pay')}}">ROTTA PER IL PAGAMENTO</a>
-              </h1> --}}
-
             </div>
 
-
-            {{-- inizia contenuto braintree (script all'interno del content --}}
             <div class="content pay-box">
 
               <form method="POST" id="payment-form"
@@ -73,27 +53,20 @@
                 @csrf
                 @method('POST')
 
-                {{-- ricordare che ci sono input nascosti che utente non dovrà modificare --}}
-
                 <section>
-                  {{-- <label type="hidden" for="restaurant-email">ristorante a cui ordino:</label> --}}
                   <input type="hidden" type="text" name="restourant-email" value="{{ $restoraunt -> email }}" readonly>
-                  {{-- <label for="restaurant-name">nome ristorante:</label> --}}
+
                   <input type="hidden" type="text" name="restourant-name" value="{{ $restoraunt -> name }}" readonly>
-                  {{-- <label for="email">email utente: </label> --}}
+
                   <input type="hidden" type="text" name="email" value="{{$newOrder -> email}}" readonly>
-                  {{-- <label for="name">name utente: </label> --}}
+
                   <input type="hidden" type="text" name="name" value="{{$newOrder -> first_name}}" readonly>
-                  {{-- <label for="last_name">lastname utente: </label> --}}
+
                   <input type="hidden" type="text" name="last_name" value="{{$newOrder -> last_name}}" readonly>
 
                   <label id="input-amount" for="amount">
-                    {{-- <h2 class="input-label">
-                      totale da pagare:
-                    </h2> --}}
 
                     <div class="input-wrapper amount-wrapper">
-                      {{-- questo input sarà hidden perché il prezzo da pagare arriverà dal carrello --}}
                       <input type="hidden" id="amount" name="amount" type="tel" min="1" placeholder="Amount"
                       value="{{$newOrder -> total_price/100}}" readonly>
                     </div>

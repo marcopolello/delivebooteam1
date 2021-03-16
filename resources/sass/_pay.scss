@@ -1,20 +1,51 @@
-#input-amount{
-  width: 100%;
-  padding:20px;
+// MEDIA
+@media all and (max-width: 900px) {
+  .order-pay-container{
+    .order-summary-box{
+      width: 90% !important;
+    }
+    .coffee-container{
+      display: none !important;
+    }
+    .cont-marg-left{
+      margin-left: 10% !important;
+    }
+    .order-pay-container #order-summary .order-summary-box,
+    .pay-box{
+      width: 90% !important;
+    }
+    .separate-summary > h1{
+      font-size: 1.80rem;
+    }
+
+  }
 }
+
 .order-pay-container{
+  h1{
+    font-size: 1.80rem;
+  }
+  #input-amount{
+    width: 100%;
+    padding:20px;
+  }
   font-family: $font-family-sans-serif;
   padding: 3% 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   min-height: 100vh;
-  background-color: $color_deliveroo;
-  background: #09D6BA;
-  background: -webkit-linear-gradient(bottom left, #09D6BA, #D1EB99);
-  background: -moz-linear-gradient(bottom left, #09D6BA, #D1EB99);
-  background: linear-gradient(to top right, #09D6BA, #D1EB99);
-  background: linear-gradient(160deg, #008982,  #008982 20%, #09D6BA 60%, #09D6BA);
+  background-image: url("/storage/polygon.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  // background-color: $color_deliveroo;
+  // background: #09D6BA;
+  // background: -webkit-linear-gradient(bottom left, #09D6BA, #D1EB99);
+  // background: -moz-linear-gradient(bottom left, #09D6BA, #D1EB99);
+  // background: linear-gradient(to top right, #09D6BA, #D1EB99);
+  // background: linear-gradient(160deg, #008982,  #008982 20%, #09D6BA 60%, #09D6BA);
   .cont-marg-left{
     margin-left: 15%;
   }
@@ -26,7 +57,7 @@
     .order-summary-box{
       // color: $color_deliveroo;
       // border: 2px solid $color_deliveroo_2;
-      width: 40%;
+      width: 55%;
       background-color: #ffffff;
       padding: 2%;
       border-radius: 3px;
@@ -34,10 +65,19 @@
         vertical-align: middle;
         padding: 2%;
         text-align: center;
-        border-radius: 3px;
         // border: 1px solid $color_deliveroo_2;
-        margin: 1em 0;
-        background-color: $color_deliveroo;
+        overflow-x: hidden;
+        margin: 10px 0;
+        background-color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+
+      }
+      .separate-summary:hover{
+        cursor: pointer;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
       }
     }
   }
@@ -47,13 +87,14 @@
 }
 .pay-box{
   margin: 0;
-  width: 40%;
+  width: 55%;
   #pay-button{
     margin-top: 5px;
-    // border-color: $color_deliveroo_2;
     border-radius: 3px;
+    background-color: $discount-price;
+    padding: 5%;
+    color: white;
     width: 100%;
-    padding: 20px;
     span{
       font-size: 22px;
     }
@@ -413,23 +454,22 @@
 
 
 // MEDIA
-@media all and (min-width: 0px) and (max-width: 900px) {
-  .coffee-container{
-    display: none;
-  }
-  .order-pay-container .cont-marg-left{
-    margin-left: 0 !important;
-  }
-  .order-pay-container #order-summary .order-summary-box,
-  .pay-box{
-    width: 100% !important;
-  }
-  .separate-summary > h1{
-    font-size: 1.80rem;
-  }
+@media all and (max-width: 900px) {
+  .order-pay-container{
+    .coffee-container{
+      display: none !important;
+    }
+    .order-pay-container .cont-marg-left{
+      margin-left: 0% !important;
+    }
+    .order-pay-container #order-summary .order-summary-box,
+    .pay-box{
+      width: 90% !important;
+    }
+    .separate-summary > h1{
+      font-size: 1.80rem;
+    }
 
-}
-
-@media all and (min-width: 576px) and (max-width: 867px) {
+  }
 
 }

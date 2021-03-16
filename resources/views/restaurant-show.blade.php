@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('/css/app.css')}}">
     <script src="{{asset('/js/app.js')}}" ></script>
 
@@ -36,6 +37,7 @@
 
   </head>
   <body>
+    @include('components.torna-su')
     <div id="app" class="rest-show-container">
 
       <header>
@@ -101,7 +103,7 @@
             @if ($restaurant -> description)
               <p class="rest_desc">{{$restaurant -> description}}</p>
             @else
-              <p class="rest_desc">Nessuna discrizione</p>    
+              <p class="rest_desc">Nessuna descrizione</p>
             @endif
             <p class="rest_phone">Contattaci allo: {{$restaurant -> phone}}</p>
           </div>
@@ -117,10 +119,14 @@
             @endif
           </div>
           <div class="delivery-box">
-            <i class="fas fa-bicycle"></i>
-            <div class="">
-              <p class="rest_address">Indirizzo: {{$restaurant -> address}}</p>
-              <p class="rest_delivery_cost">Prezzo di consegna: {{($restaurant -> delivery_cost / 100)}}€</p>
+            <div class="icons-restaurant">
+              <i class="fas fa-map-marker-alt"></i>
+              <br>
+              <i class="fas fa-bicycle"></i>
+            </div>
+            <div>
+              <p class="rest_address"> {{$restaurant -> address}}</p>
+              <p class="rest_delivery_cost"> Consegna: {{($restaurant -> delivery_cost / 100)}}€</p>
             </div>
           </div>
         </section>
@@ -143,13 +149,21 @@
         </section>
 
         <section class="rest_show_right">
-          <button v-if="cart.length === 0" class="cassa disabled">
+          <button v-if="cart.length === 0" class="cassa disabled-custom">
             Vai alla cassa
           </button>
           <div class="cart-fixed" v-if='cart.length > 0'>
-            <button class="cassa" @click='get_cart()'>
-              Vai alla cassa
-            </button>
+            <form action="{{ route('get-cart') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('POST')
+
+              <input type="hidden" name='cart' :value='JSON.stringify(cart)' >
+
+              <button type="submit" class="cassa">
+                Vai alla cassa
+              </button>
+            </form>
+
 
             <div v-for='item in cart_new' class="item-cart-row">
               <div class="item-cart-row-left">

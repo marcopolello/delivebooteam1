@@ -13,7 +13,7 @@ class FeedbackSeeder extends Seeder
      */
     public function run()
     {
-        factory(Feedback::class, 500) -> make()
+        factory(Feedback::class, 1500) -> make()
         -> each(function($feedback) {
             $user = User::inRandomOrder() -> first();
             $feedback -> user() -> associate($user);

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         PlateSeeder::class,
         OrderSeeder::class,
         FeedbackSeeder::class,
+        ImageSeeder::class,
       ]);
     }
 }

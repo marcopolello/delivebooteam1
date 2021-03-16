@@ -36,7 +36,7 @@ class ResearchController extends Controller
 
     // Restituzione pochi ristoranti casuali per HomePage
     public function getRestaurantsInit(){
-      $restaurants = User::inRandomOrder()->limit(10)
+      $restaurants = User::inRandomOrder()->limit(12)
       ->select('users.id','users.name', 'users.address', 'users.phone', 'users.description', 'users.photo', 'users.delivery_cost')
       ->get();
 

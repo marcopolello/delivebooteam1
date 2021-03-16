@@ -1,0 +1,28 @@
+#open-hamburger-menu {
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 350px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    background-color: $dashboard-secondary;
+    display: flex;
+    flex-direction: column;
+    padding-top: 55px;
+
+    .closebtn-ham {
+        position: absolute;
+        top: 15px;
+        right: 10px;
+        color: $color_deliveroo_3;
+        font-size: 1.25rem;
+    }
+}
+
+@media all and (max-width: 500px) {
+    #open-hamburger-menu {
+        width: 100%;
+    }
+}

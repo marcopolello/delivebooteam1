@@ -2,6 +2,11 @@
 
   #header-search {
     display: flex;
+
+    .container {
+      width: 1200px;
+      padding: 0 50px;
+    }
   }
   #header-no-search {
     display: none;

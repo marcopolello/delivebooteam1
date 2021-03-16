@@ -3,12 +3,7 @@
 @section('plates')
 
     <section class="list-plate">
-        <h3>Lista di tutti i tuoi piatti</h3>
-        <div class="button-dashboard">
-            <form class="" action="{{ route('dashboard') }}">
-                <button type="submit">Torna alla dashboard</button>
-            </form>
-        </div>
+        <h3 >Lista di tutti i tuoi piatti</h3>
 
         <div class="plate_orderer">
 
@@ -69,7 +64,7 @@
                             </p>
 
                         </div>
-                        
+
                         @php
                             $url_img = "/storage/plates/" . $plate -> img;
                         @endphp
@@ -81,7 +76,7 @@
                             @else
                                 style="background-image: url({{ asset('/storage/placeholder.svg') }})"
                             @endif
-                            > 
+                            >
                             </div>
 
                             <div class="button-plate">

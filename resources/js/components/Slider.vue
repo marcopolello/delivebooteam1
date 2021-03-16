@@ -9,7 +9,7 @@
                         <div v-for="item in items"
                             :key="item.id">
 
-                            <div class="card-carousel--card" 
+                            <div class="card-carousel--card"
                                 @click='$root.startResearchSlider(item.link)'>
                                 <img :src="item.tag" alt="">
                             </div>
@@ -48,7 +48,7 @@
                 {link: 'italiano', name: 'Italiano', tag: 'storage/img/organic.png'},
                 {link: 'kebab', name: 'Kebab', tag: 'storage/img/kebab.png'},
                 {link: 'burger', name: 'Burgers', tag: 'storage/img/burgers-1.png'},
-                {link: 'dessert', name: 'Dessert', tag: 'storage/img/dessert.png'},
+                {link: 'dolci', name: 'Dolci', tag: 'storage/img/dessert.png'},
                 {link: 'frappe', name: 'Frappè', tag: 'storage/img/ice-cream.png'},
                 {link: 'pizza', name: 'Pizza', tag: 'storage/img/pizza.png' },
                 {link: 'poke', name: 'Pokè', tag: 'storage/img/poke.png'},

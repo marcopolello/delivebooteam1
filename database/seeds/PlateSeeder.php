@@ -14,7 +14,7 @@ class PlateSeeder extends Seeder
      */
     public function run()
     {
-        factory(Plate::class, 2000)
+        factory(Plate::class, 1500)
         -> make()
         -> each(function($plate) {
           $user = User::inRandomOrder()->first();

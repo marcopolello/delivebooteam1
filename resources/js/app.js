@@ -44,13 +44,12 @@ function  init() {
           displayRestaurants: 1,
           displayPlates: 0,
 
+          //ham flag
+          showHam: false,
       },
       computed: {
 
         cart_new: function() {
-
-          //Controllo cart e conta gli elementi uguali.
-          //Ne lascia solo uno ma con le proprietà cambiate (quantity, plate_price).
 
           let newCart = [];
           this.cart.forEach((plate, i) => {
@@ -112,6 +111,16 @@ function  init() {
       },
       methods: {
 
+        openHam: function() {
+          this.showHam = true;
+          $("body").addClass("scroll-hide");
+        },
+
+        closeHam: function() {
+          this.showHam = false;
+          $("body").removeClass("scroll-hide");
+        },
+
         getRestaurantsInit: function(){
           axios.get('/getrestaurantsinit', {
             params: {
@@ -127,7 +136,7 @@ function  init() {
         },
 
         startResearch: function(queries){
-          console.log(queries);
+          // console.log(queries);
           this.oldSearchInput = queries;
           this.loading = 1;
           this.result_tendina = 1;
@@ -185,7 +194,7 @@ function  init() {
         },
 
         startResearchSlider: function(query){
-          console.log(query);
+          // console.log(query);
           this.oldSearchInput = query;
           this.no_result = 0;
           this.research_error = 0;
@@ -275,27 +284,6 @@ function  init() {
         reset_cart: function() {
           this.cart = [];
           this.cart_new = [];
-        },
-
-        get_cart: function() {
-
-          axios.post('http://localhost:8000/keep-cart', {
-                    cart: this.cart
-                  })
-                .then(cart => {
-
-                  if (cart.status === 200) {
-
-                    for(let i=0; i<cart.data.length; i++) {
-                      this.order.push(cart.data[i]);
-                    }
-                  window.location='http://localhost:8000/create/order';
-                  }
-
-                })
-                .catch(error => {
-                  console.log(error);
-                });
         },
 
         plate_final_price: function(price, discount) {

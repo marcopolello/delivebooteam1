@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Typology;
 
 class HomeController extends Controller
 {
@@ -34,13 +35,22 @@ class HomeController extends Controller
     //Restaurant Edit
     public function restaurantEdit(){
       $user = Auth::user();
-      return view('restaurant-edit.form-view', compact('user'));
+
+      $email_user = $user -> email;
+      $word = '@';
+      $mail_cut = substr($email_user, 0, strpos($email_user, $word));
+
+      $alltypes = Typology::all();
+
+      return view('restaurant-edit.form-view', compact('user', 'mail_cut', 'alltypes'));
     }
 
     public function uploadInfo(Request $request){
 
       if ($request['delivery_cost_cent'] == '00') {
-        $request['delivery_cost_cent'] = 0;
+        $request['delivery_cost_cent'] = '0';
+      } else if (substr($request['delivery_cost_cent'], 0, 1) == '0' && $request['delivery_cost_cent'] != '0') {
+        $request['delivery_cost_cent'] = substr($request['delivery_cost_cent'], 1);
       }
 
       $request -> validate([
@@ -49,6 +59,7 @@ class HomeController extends Controller
         'phone' => ['required', 'string', 'min:6', 'max:30'],
         'delivery_cost_euro' => ['required', 'integer', 'min:0', 'max:9999'],
         'delivery_cost_cent' => ['required', 'integer', 'min:0', 'max:99'],
+        'types' => ['required', 'max:5'],
       ]);
 
       // $plate_price = ($data['price_euro'] * 100) + $data['price_cents'];
@@ -59,10 +70,14 @@ class HomeController extends Controller
       }
 
       $user = Auth::user();
-      $user -> description = $request->description;
-      $user -> phone = $request->phone;
+      $user -> description = $request -> description;
+      $user -> phone = $request -> phone;
       $user -> delivery_cost = $deliveryCost;
       $user -> save();
+
+      $types = Typology::findOrFail($request['types']);
+
+      $user -> typologies() -> sync($types);
 
       return redirect() -> route('restaurant-edit');
     }

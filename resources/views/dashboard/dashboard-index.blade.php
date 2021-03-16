@@ -18,7 +18,12 @@
             @if (!empty($orders_3))
                 @foreach ($orders_3 as $item_3)
                     <div class="mini-card">
-                        <h5>{{$item_3 -> first_name}} {{$item_3 -> last_name}}</h5>
+                        <a class="fake-link" href='{{ route('restaurant-comanda', $item_3 -> id) }}'>
+                            <h5>
+                            {{$item_3 -> first_name}} {{$item_3 -> last_name}}
+                        </h5> 
+                        <span></span>
+                        </a>
                         <hr>
                         <div class="price-right">
                             @if ($item_3 -> payment_state)
@@ -38,29 +43,102 @@
             @endif
         </div>
         {{-- CARD STATISTICS --}}
-        <div class="card">
+        <div class="card resp-card">
             <h3>Le tue statistiche</h3>
             <div class="graph-chart-js">
-                <div>
-                    {!! $chartjsDashboard->render() !!}
-                </div>
+                {!! $chartjsDashboard->render() !!}
             </div>
+            <span></span>
         </div>
         {{-- CARD FEEDBACK --}}
-        <div id="resp-card" class="card">
+        <div class="card resp-card">
             <h3>I tuoi feedback</h3>
             <div class="graph-chart-js">
-                <div>
-                    {!! $chartjsFeedbacks->render() !!}
-                </div>
+                {!! $chartjsFeedbacks->render() !!}
             </div>
             <form action="{{ route('feedbacks') }}">
-                <button class="btn btn-success" type="submit">
+                <button class="btn btn-outline-info btn-sm" type="submit">
                     Visualizza i feedbacks
                     <span class="plate-color"></span><span class="plate-color"></span><span class="plate-color"></span><span class="plate-color"></span>
                 </button>
             </form>
         </div>
+    </div>
+
+    <div class="cash-cards">
+
+        <div class="sub-cash">
+            <h4>
+                Ordini nelle ultime 24 ore:
+            </h4>
+                @php
+                    $tot_orders_24 = 0;
+                    if(!empty($total_24h)) {
+                        foreach ($total_24h as $ord_24) {
+                            $tot_orders_24++;
+                        }
+                    } else {
+                        $tot_orders_24 = 'Nessun ordine';
+                    }
+                @endphp 
+            <h2>
+                {{$tot_orders_24}}
+            </h2>
+            <h4>
+                Fatturato: 
+            </h4>
+                @php
+                    $total_euro24 = 0;
+                    if(!empty($total_24h)) {
+                        foreach ($total_24h as $ord_24) {
+                            $total_euro24 += $ord_24 -> total_price;
+                        }
+                        $total_euro24 = $total_euro24 / 100;
+                    } else {
+                        $total_euro24 = 0;
+                    }
+                @endphp
+                <h2>
+                    {{$total_euro24}} €
+                </h2>
+        </div>
+
+        <div class="sub-cash">
+            <h4>
+                Ordini nell'ultimo mese: 
+            </h4>
+                @php
+                    $tot_orders_1m = 0;
+                    if(!empty($total_1month)) {
+                        foreach ($total_1month as $ord_24) {
+                            $tot_orders_1m++;
+                        }
+                    } else {
+                        $tot_orders_1m = 'Nessun ordine';
+                    }
+                @endphp
+            <h2>
+                {{$tot_orders_1m}}
+            </h2>
+            <h4>
+                Fatturato: 
+            </h4>
+                @php
+                    $total_euro_1m = 0;
+                    if(!empty($total_1month)) {
+                        foreach ($total_1month as $ord_1m) {
+                            $total_euro_1m += $ord_1m -> total_price;
+                        }
+                        $total_euro_1m = $total_euro_1m / 100;
+                    } else {
+                        $total_euro_1m = 0;
+                    }
+                @endphp
+            <h2>
+                {{$total_euro_1m}} €
+            </h2>
+        </div>
+
     </div>
   </section>
 @endsection

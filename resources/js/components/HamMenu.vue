@@ -114,32 +114,6 @@
 </script>
 
 <style>
-    /* body{
-      height: 100%;
-    } */
-
-    /* body::before { */
-      /* content: "";
-      background-color: red;
-      background-size: contain;
-      opacity: 0.5;
-      display: block;
-      width: 100%;
-      min-height: 100%;
-      height: auto !important;
-      bottom: 0;
-      position: absolute;
-      z-index: 500; */
-
-/* content: "before";
-background-color: brown;
-opacity: 0.5;
-display: block;
-padding: 50% 0;
-position: absolute;
-      z-index: 500; */
-    /* } */
-
     .bm-burger-button {
       cursor: pointer;
       width: 150px;
@@ -201,5 +175,4 @@ position: absolute;
     .bm-item-list li a.active:hover{
       background-color: #00ccbc;
     }
-
 </style>

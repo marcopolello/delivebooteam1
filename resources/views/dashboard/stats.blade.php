@@ -1,28 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+@extends('layouts.layout-dashboard')
 
-    <title>Stats</title>
-</head>
-<body>
+@section('stats')
 
     <div class="statistics-box">
+
+        <h1>
+            Le tue statistiche
+        </h1>
+
+        <h3>
+            Visualizza i tuoi piatti più ordinati
+        </h3>
 
         <div class="graph">
             {!! $chartjs1->render() !!}
         </div>
-    
+
+        <h3>
+            Controlla le tue recensioni
+        </h3>
+
         <div class="graph">
             {!! $chartjs2->render() !!}
         </div>
-    
+
+        <h3>
+            Verifica le vendite del tuo anno con noi
+        </h3>
+
+        <div class="graph">
+            {!! $chartjs3->render() !!}
+        </div>
+
     </div>
 
-   
-</body>
-</html>
+@endsection

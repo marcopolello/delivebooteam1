@@ -449,11 +449,6 @@
 
     a {
         margin-top: 15px;
-
-        @media all and (max-width: 440px) {
-            width: 150px;
-            height: 35px;
-        }
     }
 }
 

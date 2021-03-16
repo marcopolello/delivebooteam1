@@ -19,7 +19,7 @@ class PaymentController extends Controller
 {
   public function getCart(Request $request) {
 
-    $data = $request -> json() -> all();
+    $data = $request -> all();
 
     $plates_selected = [];
     $to_pay = 0;
@@ -27,10 +27,12 @@ class PaymentController extends Controller
 
     $data_array = [];
 
-    foreach ($data as $value) {
-      foreach ($value as $item) {
+    $cart = json_decode($data['cart'], true);
 
-        $plate_select = Plate::findOrFail($item['plate_id']);
+    // dd($cart, $data);
+
+    foreach ($cart as $value) {
+        $plate_select = Plate::findOrFail($value['plate_id']);
         $delivery_cost = ($plate_select -> user -> delivery_cost) / 100;
 
         $discounted = $plate_select -> price * (100 - $plate_select -> discount);
@@ -41,7 +43,6 @@ class PaymentController extends Controller
         $to_pay += $discounted;
 
         $plates_selected[] = $plate_select;
-      }
     }
 
     $data_array['plates'] = $plates_selected;
@@ -49,22 +50,8 @@ class PaymentController extends Controller
     $data_array['delivery'] = $delivery_cost;
     $data_array['plateselect'] = $plate_select;
 
-    session() -> flash('data', $data_array);
-
-    return redirect() -> route('order-create');
-  }
-
-  public function create(Request $request) {
-
-    session() -> keep(['data']);
-
-    $data_array = session() -> get('data');
-
-    $request->session()->reflash();
-
     return view('orders.order-checkout', compact('data_array'));
   }
-
 
   public function storeOrder(Request $request) {
 
@@ -87,9 +74,7 @@ class PaymentController extends Controller
     foreach ($plates_id_final as $plate_id) {
 
       $plate_model_select = Plate::findOrFail($plate_id);
-      // ristorante a cui ordinano i piatti
       $restoraunt_id = $plate_model_select['user_id'];
-      // dd($restoraunt, $plate_model_select);
       $delivery_cost = ($plate_model_select -> user -> delivery_cost);
 
       $discounted = $plate_model_select -> price * (100 - $plate_model_select -> discount);
@@ -108,8 +93,8 @@ class PaymentController extends Controller
 
       'first_name' =>  'required|string|min:2|max:50',
       'last_name' =>  'required|string|min:2|max:50',
-      'email' => 'required|string|min:3|max:50',
-      'phone' => 'required|string|min:3|max:30',
+      'email' => 'required|email|min:5|max:50',
+      'phone' => 'required|string|min:6|max:30',
       'comment' => 'nullable|string|min:0|max:255',
       'address' => 'required|string|min:5|max:255',
       'total_price' =>  'required|integer|min:0|max:999999',
@@ -130,20 +115,12 @@ class PaymentController extends Controller
 
     $token = $gateway->ClientToken()->generate();
 
-    session() -> flash('correctOrder', $newOrder);
-
-
     return view('orders.order-show', [
       'token' => $token,
     ], compact('newOrder', 'restoraunt', 'token'));
   }
 
-  // CHECKOUT PAGAMENTO
   public function checkout(Request $request, $id) {
-    // dd($request);
-    // session() -> keep(['correctOrder']);
-    // $correctOrder = session() -> get('correctOrder');
-    // $request->session()->reflash();
 
     $gateway = new \Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
@@ -152,7 +129,7 @@ class PaymentController extends Controller
         'privateKey' => config('services.braintree.privateKey')
     ]);
 
-    // dd($payState, $request);
+    // dd($request -> all(), $id);
 
     // dati pagante
     $payingEmail = $_POST["email"];
@@ -200,7 +177,7 @@ class PaymentController extends Controller
           $order -> update();
 
           // invio mail al pagamento
-          return redirect() -> route('index') -> with("success_message", "transazione eseguita con successo. Ti abbiamo inviato un' email di conferma");
+          return redirect() -> route('index') -> with("success_message", "Transazione eseguita con successo. Ti abbiamo inviato un' email di conferma");
       } else {
           $errorString = "";
 
@@ -213,7 +190,7 @@ class PaymentController extends Controller
           return redirect() -> route('index') -> withErrors('An error occured with the message: ' . $result -> message);
       }
     } else {
-      return redirect() -> route('fail') -> with("error_message", "ci dispiace molto, la transazione non è andata a buon fine, riprova e sarai più fortunato ;D");
+      return redirect() -> route('fail') -> with("error_message", "Ci dispiace molto, la transazione non è andata a buon fine, riprova e sarai più fortunato ;D");
     }
 
   }
